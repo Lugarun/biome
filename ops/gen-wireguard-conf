@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+client_name=$1
+
+cat <<END
+[Interface]
+PrivateKey = $(cat secrets/wireguard/$1)
+Address = $(jq -r ".$1.ip_addr" config/wireguard.json)
+DNS = 8.8.8.8
+[Peer]
+PublicKey = $(jq -r '.[] | select(.peerType=="gateway") | .pubkey' config/wireguard.json)
+Endpoint = $(jq -r '.[] | select(.peerType=="gateway") | .endpoint' config/wireguard.json)
+AllowedIPs = 0.0.0.0/0
+END

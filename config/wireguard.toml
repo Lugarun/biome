@@ -1,0 +1,12 @@
+[hosts.tanavast]
+gateway = true
+peerType = "server"
+endpoint = 104.152.208.10
+ip_addr = "10.100.0.1/24"
+pubkey = "iOX5N/joQkUUyBVMeQUxMV4cPHXrrq25E+N/MbkAlwg="
+
+[hosts.jasnah]
+peerType = "roam"
+ip_addr = "10.100.0.2/24"
+pubkey = "rVN0RlOP/KX8I9i0lrF4v6YUEdyn3kd5g6LQP+8BCX0="
+

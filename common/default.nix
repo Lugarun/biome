@@ -1,4 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+let
+  wireguardConfig = pkgs.callPackage ./wireguard.nix { inherit config pkgs lib; };
+in
 {
   imports = [
     ./users
@@ -24,6 +27,7 @@
 
   nixpkgs.config.allowunfree = true;
   nix.allowedUsers = [ "@wheel" ];
+  networking.wireguard.interfaces.tst = wireguardConfig.createInterface config.networking.hostName;
 
   # This is needed by wpgtk
   programs.dconf.enable = true;
