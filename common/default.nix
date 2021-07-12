@@ -1,10 +1,8 @@
 { config, pkgs, lib, ... }:
-let
-  wireguardConfig = pkgs.callPackage ./wireguard.nix { inherit config pkgs lib; };
-in
 {
   imports = [
     ./users
+    ./wireguard.nix
   ];
 
   # Enable the OpenSSH daemon.
@@ -27,7 +25,6 @@ in
 
   nixpkgs.config.allowunfree = true;
   nix.allowedUsers = [ "@wheel" ];
-  networking.wireguard.interfaces.tst = wireguardConfig.createInterface config.networking.hostName;
 
   # This is needed by wpgtk
   programs.dconf.enable = true;

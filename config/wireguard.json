@@ -3,19 +3,19 @@
     "name": "tanavast",
     "peerType": "gateway",
     "endpoint": "104.152.208.10",
-    "ip_addr": "10.100.0.1/24",
-    "pubkey": "iOX5N/joQkUUyBVMeQUxMV4cPHXrrq25E+N/MbkAlwg="
+    "ip_addr": "10.100.0.1",
+    "pubkey": "aLRsNxmQCXijbaCE5Rsnji+v2MbIqzacX7rFTZhXZHQ="
   },
   "jasnah": {
     "name": "jasnah",
     "peerType": "roam",
-    "ip_addr": "10.100.0.2/24",
-    "pubkey": "rVN0RlOP/KX8I9i0lrF4v6YUEdyn3kd5g6LQP+8BCX0="
+    "ip_addr": "10.100.0.2",
+    "pubkey": "0EJEYou1Nwccz03ETkPUAAqT6It7kbpTisIaCLIOSQE="
   },
   "landline": {
     "name": "landline",
     "peerType": "roam",
-    "ip_addr": "10.100.0.3/24",
-    "pubkey": "WL+s//R1Pw7WNNK/ZF4DZOX15kADyTc9imQRSKzGj0g="
+    "ip_addr": "10.100.0.3",
+    "pubkey": "nT2H961QvTBK/P/M5t5Ytrj2BLdY7jcq1QNUGBl4ozg="
   }
 }

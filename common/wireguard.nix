@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
 let
   metadata = lib.importJSON ../config/wireguard.json;
 
@@ -7,13 +7,13 @@ let
   roamPeer = hostdata:
   {
     publicKey = hostdata.pubkey;
-    allowedIPs = [ hostdata.ip_addr ];
+    allowedIPs = [ (hostdata.ip_addr + "/32") ];
   };
 
   serverPeer = hostdata:
   {
     publicKey = hostdata.pubkey;
-    allowedIPs = [ hostdata.ip_addr ];
+    allowedIPs = [ (hostdata.ip_addr + "/32") ];
     persistentKeepalive = 25;
     endpoint = "${hostdata.endpoint}:51820";
   };
@@ -34,7 +34,7 @@ let
 
   baseInterface = hostdata:
   {
-    ips = [ "${hostdata.ip_addr}/24" ];
+    ips = [ (hostdata.ip_addr +"/24") ];
     listenPort = 51820;
     privateKeyFile = "/root/wireguard-keys/private";
     peers = builtins.map createPeer (toList (builtins.removeAttrs metadata [ hostdata.name ]));
@@ -56,7 +56,27 @@ let
   createInterface = hostname: if metadata."${hostname}".peerType == "gateway"
                               then gatewayInterface metadata."${hostname}"
                               else baseInterface metadata."${hostname}";
+
+  createQuickInterface = hostname:
+  let hostdata = metadata."${hostname}";
+  in
+  {
+    address = [ (hostdata.ip_addr +"/24") ];
+    listenPort = 51820;
+    privateKeyFile = "/root/wireguard-keys/private";
+    peers = builtins.map createPeer (toList (builtins.removeAttrs metadata [ hostdata.name ]));
+  };
+
+  hostname = config.networking.hostName;
+
 in
-rec {
-  inherit createInterface;
+{
+  networking.wireguard.interfaces = if metadata."${hostname}".peerType == "roam"
+                                    then {}
+                                    else { wg0 = createInterface config.networking.hostName; };
+
+  networking.wg-quick.interfaces = if metadata."${hostname}".peerType == "roam"
+                                   then { wg0 = createQuickInterface config.networking.hostName; }
+                                   else {};
+
 }

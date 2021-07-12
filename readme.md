@@ -12,8 +12,16 @@
 
 need to setup git encrypt before first commit
 
+# Todo
+
+- setup secrets git-crypt
+- fix jasnah wireguard setup, can only get it working via nmcli
+
 # Acknowledge
 
 This setup is heavily inspired by:
 - [Andrew Tropn's](https://www.youtube.com/channel/UCuj_loxODrOPxSsXDfJmpng) work [here](https://github.com/abcdw/rde)
 - [Christine Dodrill's](https://christine.website/) work [here](https://github.com/Xe/blog-nixos-configs)
+
+
+ip route add 0.0.0.0/0 via 10.100.0.1 dev wg0

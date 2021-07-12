@@ -32,28 +32,6 @@
     allowedUDPPorts = [ 51820 ];
   }; # Open wireguard port in the firewall
 
-  networking.wireguard.interfaces = {
-    wg0 = {
-      ips = [ "10.100.0.1/24" ];
-      listenPort  = 51820;
-      postSetup = ''
-        ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
-      ''; # allow wireguard to route traffic to the internet (turn this into a vpn)
-
-      postShutdown = ''
-        ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
-      '';
-      privateKeyFile = "/root/wireguard-keys/private";
-      peers = [
-        {
-          # laptop
-          publicKey = "rVN0RlOP/KX8I9i0lrF4v6YUEdyn3kd5g6LQP+8BCX0=";
-          allowedIPs = [ "10.100.0.2/32" ];
-        }
-      ];
-    };
-  };
-
   system.stateVersion = "21.05";
 }
 

@@ -4,28 +4,32 @@
   };
 
   "tanavast" = { config, pkgs, lib, ... }: {
-      imports = [ ../../hosts/tanavast/configuration.nix ];
+      imports = [ ../hosts/tanavast/configuration.nix ];
       deployment = {
         targetUser = "root";
-        targetHost = "10.100.0.1";
+        targetHost = "104.152.208.10";
         secrets = {
-          source = "../../secrets/wireguard/tanavast";
-          destination = "/root/wireguard-keys/private";
-          owner.user = "root";
-          owner.group = "root";
+          "wireguard-key" = {
+            source = "../secrets/wireguard/tanavast.pri";
+            destination = "/root/wireguard-keys/private";
+            owner.user = "root";
+            owner.group = "root";
+          };
         };
       };
   };
   "jasnah" = { config, pkgs, lib, ... }: {
-      imports = [ ../../hosts/jasnah/configuration.nix ];
+      imports = [ ../hosts/jasnah/configuration.nix ];
       deployment = {
         targetUser = "root";
-        targetHost = "10.100.0.2";
+        targetHost = "127.0.0.1";
         secrets = {
-          source = "../../secrets/wireguard/jasnah";
-          destination = "/root/wireguard-keys/private";
-          owner.user = "root";
-          owner.group = "root";
+          "wireguard-key" = {
+            source = "../secrets/wireguard/jasnah.pri";
+            destination = "/root/wireguard-keys/private";
+            owner.user = "root";
+            owner.group = "root";
+          };
         };
       };
   };

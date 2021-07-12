@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  authorizedSSHKeys = pkgs.callPackage ../../ops/authorizedSSHKeys.nix { inherit pkgs; };
+  authorizedSSHKeys = pkgs.callPackage ./authorizedSSHKeys.nix { inherit pkgs; };
 in {
 
   users.mutableUsers = false;
