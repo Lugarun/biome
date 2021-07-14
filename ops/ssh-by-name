@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 client_name=$1
 ip=$(jq -r ".$client_name.ip_addr" config/wireguard.json)
-ssh root@${ip::-3}
+ssh root@$ip

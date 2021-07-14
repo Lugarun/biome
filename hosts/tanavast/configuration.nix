@@ -29,7 +29,8 @@
   networking.nat.externalInterface = "eth0";
   networking.nat.internalInterfaces = [ "wg0" ];
   networking.firewall = {
-    allowedUDPPorts = [ 51820 ];
+    allowedTCPPorts = [ 53 ];
+    allowedUDPPorts = [ 53 51820 ];
   }; # Open wireguard port in the firewall
 
   system.stateVersion = "21.05";

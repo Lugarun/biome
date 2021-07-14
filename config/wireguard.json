@@ -17,5 +17,11 @@
     "peerType": "roam",
     "ip_addr": "10.100.0.3",
     "pubkey": "nT2H961QvTBK/P/M5t5Ytrj2BLdY7jcq1QNUGBl4ozg="
+  },
+  "fiasco": {
+    "name": "fiasco",
+    "peerType": "roam",
+    "ip_addr": "10.100.0.4",
+    "pubkey": "msdmphCFSOCBIt9YG2BfKzNluXMygsL+wO6IpQOiEAM="
   }
 }

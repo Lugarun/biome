@@ -11,7 +11,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "fiasco"; r.
+  networking.hostName = "fiasco";
 
   networking.useDHCP = false;
   networking.interfaces.enp3s0.useDHCP = true;
@@ -34,6 +34,9 @@
   services.xserver.layout = "us";
   services.xserver.libinput.enable = true;
   services.xserver.windowManager.xmonad.enable = true;
+
+  # Prevent suspend
+  services.logind.lidSwitch = "ignore";
 
 
   # change backlight

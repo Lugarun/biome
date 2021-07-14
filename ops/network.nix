@@ -33,4 +33,19 @@
         };
       };
   };
+  "fiasco" = { config, pkgs, lib, ... }: {
+      imports = [ ../hosts/fiasco/configuration.nix ];
+      deployment = {
+        targetUser = "root";
+        targetHost = "192.168.0.26";
+        secrets = {
+          "wireguard-key" = {
+            source = "../secrets/wireguard/fiasco.pri";
+            destination = "/root/wireguard-keys/private";
+            owner.user = "root";
+            owner.group = "root";
+          };
+        };
+      };
+  };
 }
