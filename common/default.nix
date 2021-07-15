@@ -2,7 +2,8 @@
 {
   imports = [
     ./users
-    ./wireguard.nix
+    ../modules/wireguard.nix
+    ../modules/syncthing.nix
   ];
 
   # Enable the OpenSSH daemon.
@@ -29,5 +30,13 @@
 
   # This is needed by wpgtk
   programs.dconf.enable = true;
+
+
+  # biome config
+  biome.syncthing.enable = true;
+  biome.syncthing.folders = lib.importJSON ../config/syncthing.json;
+
+  biome.wireguard.enable = true;
+  biome.wireguard.networkInfo = lib.importJSON ../config/wireguard.json;
 
 }

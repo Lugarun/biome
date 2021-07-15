@@ -1,27 +1,25 @@
 {
-  "tanavast": {
+  "gateway": {
     "name": "tanavast",
-    "peerType": "gateway",
     "endpoint": "104.152.208.10",
     "ip_addr": "10.100.0.1",
     "pubkey": "aLRsNxmQCXijbaCE5Rsnji+v2MbIqzacX7rFTZhXZHQ="
   },
-  "jasnah": {
-    "name": "jasnah",
-    "peerType": "roam",
-    "ip_addr": "10.100.0.2",
-    "pubkey": "0EJEYou1Nwccz03ETkPUAAqT6It7kbpTisIaCLIOSQE="
-  },
-  "landline": {
-    "name": "landline",
-    "peerType": "roam",
-    "ip_addr": "10.100.0.3",
-    "pubkey": "nT2H961QvTBK/P/M5t5Ytrj2BLdY7jcq1QNUGBl4ozg="
-  },
-  "fiasco": {
-    "name": "fiasco",
-    "peerType": "roam",
-    "ip_addr": "10.100.0.4",
-    "pubkey": "msdmphCFSOCBIt9YG2BfKzNluXMygsL+wO6IpQOiEAM="
+  "roamers": {
+    "jasnah": {
+      "name": "jasnah",
+      "ip_addr": "10.100.0.2",
+      "pubkey": "0EJEYou1Nwccz03ETkPUAAqT6It7kbpTisIaCLIOSQE="
+    },
+    "landline": {
+      "name": "landline",
+      "ip_addr": "10.100.0.3",
+      "pubkey": "nT2H961QvTBK/P/M5t5Ytrj2BLdY7jcq1QNUGBl4ozg="
+    },
+    "fiasco": {
+      "name": "fiasco",
+      "ip_addr": "10.100.0.4",
+      "pubkey": "msdmphCFSOCBIt9YG2BfKzNluXMygsL+wO6IpQOiEAM="
+    }
   }
 }

@@ -48,20 +48,6 @@
             owner.user = "root";
             owner.group = "root";
           };
-          "nextcloud-db-pass-key" = {
-            source = "../secrets/nextcloud/nextcloud-db-pass";
-            destination = "/var/nextcloud-db-pass";
-            owner.user = "nextcloud";
-            owner.group = "nextcloud";
-            permissions = "770";
-          };
-          "nextcloud-admin-pass-key" = {
-            source = "../secrets/nextcloud/nextcloud-admin-pass";
-            destination = "/var/nextcloud-admin-pass";
-            owner.user = "nextcloud";
-            owner.group = "nextcloud";
-            permissions = "770";
-          };
         };
       };
   };

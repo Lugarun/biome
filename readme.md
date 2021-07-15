@@ -55,7 +55,7 @@ On fiasco:
 # Todo
 
 - setup secrets git-crypt
-- clean wireguard setup
+- make the network file read the wireguard config for deployment
 - fix dns leak
 - setup 
  
