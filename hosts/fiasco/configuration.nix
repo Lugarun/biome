@@ -5,6 +5,7 @@
     [ 
       ./hardware-configuration.nix
       ../../common
+      ../../common/syncthing.nix
     ];
 
   # Use the systemd-boot EFI boot loader.

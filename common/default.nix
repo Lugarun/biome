@@ -19,11 +19,12 @@
     wget
     docker
     wireguard
+    bashmount
   ];
 
   virtualisation.docker.enable = true ;
 
-  nixpkgs.config.allowunfree = true;
+  nixpkgs.config.allowUnfree = true;
   nix.allowedUsers = [ "@wheel" ];
 
   # This is needed by wpgtk

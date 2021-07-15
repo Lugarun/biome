@@ -22,7 +22,7 @@ let
   {
     publicKey = hostdata.pubkey;
     allowedIPs = [ "0.0.0.0/0" ];
-    persistentKeepalive = 25;
+    persistentKeepalive = 3;
     endpoint = "${hostdata.endpoint}:51820";
   };
 
@@ -37,13 +37,21 @@ let
     ips = [ (hostdata.ip_addr +"/24") ];
     listenPort = 51820;
     privateKeyFile = "/root/wireguard-keys/private";
-    peers = builtins.map createPeer (toList (builtins.removeAttrs metadata [ hostdata.name ]));
+    peers = [ (createPeer metadata.tanavast) ];
   };
 
   gatewayInterface = hostdata:
   {
-    inherit (baseInterface hostdata) ips listenPort privateKeyFile peers;
+    inherit (baseInterface hostdata) ips listenPort privateKeyFile;
+    # https://www.ckn.io/blog/2017/11/14/wireguard-vpn-typical-setup/
+    peers = builtins.map createPeer (toList (builtins.removeAttrs metadata [ hostdata.name ]));
     postSetup = ''
+      ${pkgs.iptables}/bin/iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+      ${pkgs.iptables}/bin/iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+      ${pkgs.iptables}/bin/iptables -A INPUT -p udp -m udp --dport 51820 -m conntrack --ctstate NEW -j ACCEPT
+      ${pkgs.iptables}/bin/iptables -A INPUT -s 10.100.0.0/24 -p tcp -m tcp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+      ${pkgs.iptables}/bin/iptables -A INPUT -s 10.100.0.0/24 -p udp -m udp --dport 53 -m conntrack --ctstate NEW -j ACCEPT
+      ${pkgs.iptables}/bin/iptables -A FORWARD -i wg0 -o wg0 -m conntrack --ctstate NEW -j ACCEPT
       ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
     ''; # allow wireguard to route traffic to the internet (turn this into a vpn)
 
@@ -52,7 +60,6 @@ let
     '';
 
   };
-
   createInterface = hostname: if metadata."${hostname}".peerType == "gateway"
                               then gatewayInterface metadata."${hostname}"
                               else baseInterface metadata."${hostname}";
@@ -63,8 +70,9 @@ let
   {
     address = [ (hostdata.ip_addr +"/24") ];
     listenPort = 51820;
+    dns = [ metadata.tanavast.ip_addr ];
     privateKeyFile = "/root/wireguard-keys/private";
-    peers = builtins.map createPeer (toList (builtins.removeAttrs metadata [ hostdata.name ]));
+    peers = [ (createPeer metadata.tanavast) ];
   };
 
   hostname = config.networking.hostName;
@@ -79,4 +87,21 @@ in
                                    then { wg0 = createQuickInterface config.networking.hostName; }
                                    else {};
 
+  services = if metadata."${hostname}".peerType == "gateway"
+             then {
+               dnsmasq = {
+                 enable = true;
+                 resolveLocalQueries = true;
+                 extraConfig = ''
+                   interface=wg0
+                   server=1.1.1.1
+                   address=/tanavast.home/10.100.0.1
+                   address=/jasnah.home/10.100.0.2
+                   address=/landline.home/10.100.0.3
+                   address=/fiasco.home/10.100.0.4
+                   address=/nextcloud.home/10.100.0.4
+                 '';
+               };
+             }
+             else {};
 }
