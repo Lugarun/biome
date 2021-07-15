@@ -26,3 +26,9 @@ morph-push:
 
 morph-deploy:
 	morph deploy ops/network.nix switch
+
+morph-overhaul:
+	morph build --keep-result ops/network.nix
+	morph push ops/network.nix
+	morph upload-secrets ops/network.nix
+	morph deploy ops/network.nix switch
