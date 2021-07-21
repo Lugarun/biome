@@ -3,8 +3,10 @@
 Welcome to Biome, my vpn/selfhosting setup!
 Here are the features we have so far:
 - everything runs nixos so we have one click deploys and updates to all devices on the net
-- wireguard (laptop, phone, local server, remote server)
+- wireguard (laptop `jasnah`, phone, local server `fiasco`, remote server `tanavast`)
 - dnsmasq (each device and service gets a `.biome` domain)
+- syncthing (laptop `jasnah` syncs with file server on my lan `fiasco`)
+- restic (my file server `fiasco` makes encrypted backups to a onedrive account)
 
 ## Wireguard
 
@@ -30,13 +32,31 @@ I am currently looking into using sftp to sync photos from my iphone to
 my other devices and using something like [filestash](https://www.filestash.app/) for file web access.
 I also want to setup a nice photo service like [lychee](https://lychee.electerious.com/).
 
-I also need to setup backups, I plan on using [restic](https://restic.net/).
+### Restic Campus Onedrive
+
+This is my current backup solution. My school gives it's students free access
+to 5 TB of onedrive storage. I am using this space as a restic repository
+to backup my files. Three times a week all of my files on `fiasco` (my file server) are backed
+up to the restic server. Here are the initial setup steps.
+
+
+Setup rclone with onedrive giving the repo a name that matches the later restic config.
+```
+rclone config
+```
+Then find the rclone config and add it to your secrets.
+```
+rclone config file
+```
+Finally create a password for your restic backup and add it to your secrets. To manually trigger a backup run
+```
+systemctl start restic-backups-uwonedrive.service
+```
 
 ## Todo
 
 - fix dns leak
 - iphone file sync
-- backups
 - web file frontend
 - add personal website hosting
  
@@ -47,3 +67,4 @@ This setup is heavily inspired by the following:
 - [morph config](https://github.com/Xe/blog-nixos-configs)
 - [wireguard setup](https://github.com/abcdw/rde)
 - [syncthing nixos](https://cloud.tissot.de/gitea/benneti/nixos/src/commit/a6ec7bd0206642537596ffdf11049af8312ca6c6)
+- [nixos restic rclone](https://francis.begyn.be/blog/nixos-restic-backups) [and this](https://wiki.cont.run/self-hosted-services/)
