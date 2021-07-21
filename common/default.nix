@@ -34,6 +34,7 @@
 
   # biome config
   biome.syncthing.enable = true;
+  biome.syncthing.baseDir = lib.mkIf (config.networking.hostName == "fiasco") /home/syncthing/data;
   biome.syncthing.folders = lib.importJSON ../config/syncthing.json;
 
   biome.wireguard.enable = true;

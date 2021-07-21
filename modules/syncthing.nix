@@ -35,20 +35,16 @@ in {
   config = let
     hasAFolder = lib.elem config.networking.hostName (lib.flatten (lib.forEach (lib.attrValues cfg.folders) lib.attrNames));
   in
-    lib.mkIf (cfg.enable && hasAFolder) {
+    lib.mkIf (cfg.enable && hasAFolder) rec {
     services.syncthing = {
       enable = true;
       openDefaultPorts = true;
-      user = "lukas";
-      group = "wheel";
-      dataDir = cfg.baseDir + /.sync;
-      configDir = cfg.baseDir + /.config/syncthing;
       guiAddress = "0.0.0.0:8384";
       declarative.devices = lib.mapAttrs (name: value: {id = value;}) (lib.fold lib.recursiveUpdate { } (lib.attrValues cfg.folders));
       declarative.folders =
         let
           ifEnabledDevice = devices: lib.elem config.networking.hostName devices;
-          createFolderConfig = folder: devices: {
+          createFolderConfig = folder: devices: lib.nameValuePair (builtins.toString (cfg.baseDir + "/${folder}")) {
             id = folder;
             devices = builtins.attrNames devices;
             path = builtins.toString (cfg.baseDir + "/${folder}");
@@ -56,9 +52,22 @@ in {
             rescanInterval = 7200;
             enable = ifEnabledDevice (builtins.attrNames devices);
           };
-        in lib.mapAttrs createFolderConfig cfg.folders;
+        in lib.mapAttrs' createFolderConfig cfg.folders;
     };
 
+    systemd.tmpfiles.rules = [
+      "d /home/lukas 750 lukas syncthing"
+      ] ++ lib.lists.flatten (builtins.map (
+      dir:
+      [
+        "d ${dir} 2770 lukas syncthing"
+        "a ${dir}/ - - - - group:syncthing:rwx,other::-"
+        "a ${dir}/ - - - - default:group:syncthing:rwx,default:other::-"
+      ]) (builtins.attrNames services.syncthing.declarative.folders));
+
+
+
+    networking.firewall.interfaces.wg0.allowedTCPPorts = [ 80 ];
     services.nginx = {
       enable = true;
 
@@ -71,8 +80,7 @@ in {
         "${config.networking.hostName}.biome" = {
           forceSSL = false;
           locations."/syncthing/" = {
-            proxyPass = "http://localhost:8384/";
-            extraConfig = "proxy_pass_header Authorization;";
+            proxyPass = "http://0.0.0.0:8384/";
           };
         };
       };

@@ -32,3 +32,19 @@ morph-overhaul:
 	morph push ops/network.nix
 	morph upload-secrets ops/network.nix
 	morph deploy ops/network.nix switch
+	
+morph-build/%:
+	morph build --keep-result ops/network.nix
+
+morph-push/%:
+	morph push ops/network.nix
+	morph upload-secrets ops/network.nix
+
+morph-deploy/%:
+	morph deploy ops/network.nix switch
+
+morph-overhaul/%:
+	morph build --keep-result ops/network.nix --on $(shell basename $@)
+	morph push ops/network.nix --on $(shell basename $@)
+	morph upload-secrets ops/network.nix --on $(shell basename $@)
+	morph deploy ops/network.nix switch --on $(shell basename $@)
