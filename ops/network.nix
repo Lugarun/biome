@@ -7,8 +7,8 @@
       imports = [ ../hosts/tanavast/configuration.nix ];
       deployment = {
         targetUser = "root";
-        # targetHost = "104.152.208.10";
-        targetHost = "10.100.0.1";
+        targetHost = "104.152.208.10";
+        # targetHost = "10.100.0.1";
         secrets = {
           "wireguard-key" = {
             source = "../secrets/wireguard/tanavast.pri";
@@ -23,8 +23,8 @@
       imports = [ ../hosts/jasnah/configuration.nix ];
       deployment = {
         targetUser = "root";
-        # targetHost = "127.0.0.1";
-        targetHost = "10.100.0.2";
+        targetHost = "127.0.0.1";
+        # targetHost = "10.100.0.2";
         secrets = {
           "wireguard-key" = {
             source = "../secrets/wireguard/jasnah.pri";
@@ -39,8 +39,8 @@
       imports = [ ../hosts/fiasco/configuration.nix ];
       deployment = {
         targetUser = "root";
-        # targetHost = "192.168.0.10";
-        targetHost = "10.100.0.4";
+        targetHost = "192.168.0.10";
+        #  targetHost = "10.100.0.4";
         secrets = {
           "wireguard-key" = {
             source = "../secrets/wireguard/fiasco.pri";

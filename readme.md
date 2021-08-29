@@ -29,7 +29,7 @@ I love syncthing but it doesn't play nice with ios. To bridge this gap I tried n
 external local folder feature is horrible. This means nextcloud won't play nice with syncthing.
 
 I am currently looking into using sftp to sync photos from my iphone to
-my other devices and using something like [filestash](https://www.filestash.app/) for file web access.
+my other devices and using something like [filestash](https://www.filestash.app/) or [gossa](https://github.com/pldubouilh/gossa) or [h5ai](https://larsjung.de/h5ai/) for file web access.
 I also want to setup a nice photo service like [lychee](https://lychee.electerious.com/).
 
 ### Restic Campus Onedrive
@@ -55,10 +55,12 @@ systemctl start restic-backups-uwonedrive.service
 
 ## Todo
 
+- fix mount from nextcloud to syncthing (move things appropriately) on fiasco
 - fix dns leak
 - iphone file sync
 - web file frontend
 - add personal website hosting
+- add calendar 
  
 ## Acknowledgments
 
@@ -68,3 +70,4 @@ This setup is heavily inspired by the following:
 - [wireguard setup](https://github.com/abcdw/rde)
 - [syncthing nixos](https://cloud.tissot.de/gitea/benneti/nixos/src/commit/a6ec7bd0206642537596ffdf11049af8312ca6c6)
 - [nixos restic rclone](https://francis.begyn.be/blog/nixos-restic-backups) [and this](https://wiki.cont.run/self-hosted-services/)
+- [selfhosted software listing](https://github.com/awesome-selfhosted/awesome-selfhosted)
