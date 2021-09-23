@@ -48,3 +48,6 @@ morph-overhaul/%:
 	morph push ops/network.nix --on $(shell basename $@)
 	morph upload-secrets ops/network.nix --on $(shell basename $@)
 	morph deploy ops/network.nix switch --on $(shell basename $@)
+
+config/dnsmasqConfig.txt:
+	curl https://raw.githubusercontent.com/notracking/hosts-blocklists/master/dnsmasq/dnsmasq.blacklist.txt > $@
