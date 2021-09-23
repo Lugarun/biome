@@ -40,6 +40,7 @@ in {
       enable = true;
       openDefaultPorts = true;
       guiAddress = "0.0.0.0:8384";
+      user = "lukas";
       declarative.devices = lib.mapAttrs (name: value: {id = value;}) (lib.fold lib.recursiveUpdate { } (lib.attrValues cfg.folders));
       declarative.folders =
         let
@@ -55,15 +56,13 @@ in {
         in lib.mapAttrs' createFolderConfig cfg.folders;
     };
 
-    systemd.tmpfiles.rules = [
-      "d /home/lukas 750 lukas syncthing"
-      ] ++ lib.lists.flatten (builtins.map (
+    systemd.tmpfiles.rules = lib.lists.flatten (builtins.map (
       dir:
       [
         "d ${dir} 2770 lukas syncthing"
         "a ${dir}/ - - - - group:syncthing:rwx,other::-"
         "a ${dir}/ - - - - default:group:syncthing:rwx,default:other::-"
-      ]) (builtins.attrNames services.syncthing.declarative.folders));
+      ]) ( ["/var/lib/syncthing"] ++ (builtins.attrNames services.syncthing.declarative.folders)));
 
 
 
@@ -81,6 +80,14 @@ in {
           forceSSL = false;
           locations."/syncthing/" = {
             proxyPass = "http://0.0.0.0:8384/";
+          };
+        };
+      };
+      virtualHosts = {
+        "zettelkasten.biome" = {
+          locations."/" = {
+            proxyPass = "http://localhost:8000/";
+            proxyWebsockets = true;
           };
         };
       };

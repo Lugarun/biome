@@ -37,6 +37,11 @@ in {
         };
       };
     };
+
+    dnsmasqConfig = lib.mkOption {
+      type = lib.types.lines;
+      default = "";
+    };
   };
 
   config = let
@@ -95,9 +100,12 @@ in {
       extraConfig = ''
         interface=wg0
         server=1.1.1.1
+        address=/zettelkasten.biome/10.100.0.4
         '' +
         mkAddr cfg.networkInfo.gateway
-        + (lib.concatStrings (lib.forEach (lib.attrValues cfg.networkInfo.roamers) mkAddr));
+        + (lib.concatStrings (lib.forEach (lib.attrValues cfg.networkInfo.roamers) mkAddr))
+        + ''
+        '' + cfg.dnsmasqConfig;
     };
   };
 }
