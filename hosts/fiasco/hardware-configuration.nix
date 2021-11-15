@@ -23,7 +23,7 @@
       fsType = "vfat";
     };
 
-  fileSystems."/home/nextcloud/data" =
+  fileSystems."/home/syncthing/data" =
     { device = "/dev/disk/by-uuid/e15aa39c-ad60-4e0a-a1d4-b5422e7e0728";
       fsType = "ext4";
     };
