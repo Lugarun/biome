@@ -34,14 +34,14 @@ morph-overhaul:
 	morph deploy ops/network.nix switch
 	
 morph-build/%:
-	morph build --keep-result ops/network.nix
+	morph build --keep-result ops/network.nix --on $(shell basename $@)
 
 morph-push/%:
-	morph push ops/network.nix
-	morph upload-secrets ops/network.nix
+	morph push ops/network.nix --on $(shell basename $@)
+	morph upload-secrets ops/network.nix --on $(shell basename $@)
 
 morph-deploy/%:
-	morph deploy ops/network.nix switch
+	morph deploy ops/network.nix switch --on $(shell basename $@)
 
 morph-overhaul/%:
 	morph build --keep-result ops/network.nix --on $(shell basename $@)
