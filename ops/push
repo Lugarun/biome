@@ -1,7 +1,0 @@
-# Explode on error
-set -e
-
-morph build --keep-result ./network.nix
-morph push ./network.nix
-morph deploy ./network.nix switch
-

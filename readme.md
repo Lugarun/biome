@@ -55,6 +55,7 @@ systemctl start restic-backups-uwonedrive.service
 
 ## Todo
 
+- secret distribution (uses legacy morph right now)
 - fix mount from nextcloud to syncthing (move things appropriately) on fiasco
 - fix dns leak
 - iphone file sync
@@ -71,3 +72,4 @@ This setup is heavily inspired by the following:
 - [syncthing nixos](https://cloud.tissot.de/gitea/benneti/nixos/src/commit/a6ec7bd0206642537596ffdf11049af8312ca6c6)
 - [nixos restic rclone](https://francis.begyn.be/blog/nixos-restic-backups) [and this](https://wiki.cont.run/self-hosted-services/)
 - [selfhosted software listing](https://github.com/awesome-selfhosted/awesome-selfhosted)
+- [flake and deploy-rs showcase](https://github.com/bbigras/nix-config/blob/master/nix/mk-host.nix)

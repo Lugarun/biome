@@ -1,10 +1,8 @@
 {
   network = {
-    description = "Personal wireguard network";
+    description = "Legacy Biome Secret Uploader";
   };
-
   "tanavast" = { config, pkgs, lib, ... }: {
-      imports = [ ../hosts/tanavast/configuration.nix ];
       deployment = {
         targetUser = "root";
         targetHost = "104.152.208.10";
@@ -20,7 +18,6 @@
       };
   };
   "jasnah" = { config, pkgs, lib, ... }: {
-      imports = [ ../hosts/jasnah/configuration.nix ];
       deployment = {
         targetUser = "root";
         targetHost = "127.0.0.1";
@@ -36,7 +33,6 @@
       };
   };
   "fiasco" = { config, pkgs, lib, ... }: {
-      imports = [ ../hosts/fiasco/configuration.nix ];
       deployment = {
         targetUser = "root";
         targetHost = "192.168.0.10";

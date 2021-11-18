@@ -6,6 +6,12 @@
     ../modules/syncthing.nix
   ];
 
+  # Enable nix flakes
+  nix.package = pkgs.nixFlakes;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 

@@ -2,7 +2,6 @@
 
 let
   cfg = config.biome.emanote;
-  emanote = import (fetchTarball "https://github.com/srid/emanote/archive/refs/heads/master.tar.gz");
 in {
   options.biome.emanote = {
     enable = lib.mkOption {
@@ -25,7 +24,7 @@ in {
       description = "Start the emanote server.";
       serviceConfig = {
         User = "lukas";
-        ExecStart = "${emanote.outputs.defaultPackage.x86_64-linux}/bin/emanote --layers ${cfg.noteDir}";
+        ExecStart = "${pkgs.emanote.outputs.defaultPackage.x86_64-linux}/bin/emanote --layers ${cfg.noteDir}";
       };
     };
   };

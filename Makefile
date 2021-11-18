@@ -17,37 +17,15 @@ build/%.qr: build/%.conf
 ssh/%:
 	bash ops/ssh-by-name $(shell basename -s .conf $@)
 
-morph-build:
-	morph build --keep-result ops/network.nix
-
-morph-push:
-	morph push ops/network.nix
+deploy-rs:
+	nix flake lock --update-input ecosystem
 	morph upload-secrets ops/network.nix
-
-morph-deploy:
-	morph deploy ops/network.nix switch
-
-morph-overhaul:
-	morph build --keep-result ops/network.nix
-	morph push ops/network.nix
-	morph upload-secrets ops/network.nix
-	morph deploy ops/network.nix switch
+	deploy
 	
-morph-build/%:
-	morph build --keep-result ops/network.nix --on $(shell basename $@)
-
-morph-push/%:
-	morph push ops/network.nix --on $(shell basename $@)
+deploy-rs/%:
+	nix flake lock --update-input ecosystem
 	morph upload-secrets ops/network.nix --on $(shell basename $@)
-
-morph-deploy/%:
-	morph deploy ops/network.nix switch --on $(shell basename $@)
-
-morph-overhaul/%:
-	morph build --keep-result ops/network.nix --on $(shell basename $@)
-	morph push ops/network.nix --on $(shell basename $@)
-	morph upload-secrets ops/network.nix --on $(shell basename $@)
-	morph deploy ops/network.nix switch --on $(shell basename $@)
+	deploy .#$(shell basename $@)
 
 config/dnsmasqConfig.txt:
 	curl https://raw.githubusercontent.com/notracking/hosts-blocklists/master/dnsmasq/dnsmasq.blacklist.txt > $@
