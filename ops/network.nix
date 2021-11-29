@@ -8,12 +8,6 @@
         targetHost = "104.152.208.10";
         # targetHost = "10.100.0.1";
         secrets = {
-          "wireguard-key" = {
-            source = "../secrets/wireguard/tanavast.pri";
-            destination = "/root/wireguard-keys/private";
-            owner.user = "root";
-            owner.group = "root";
-          };
         };
       };
   };
@@ -23,27 +17,15 @@
         targetHost = "127.0.0.1";
         # targetHost = "10.100.0.2";
         secrets = {
-          "wireguard-key" = {
-            source = "../secrets/wireguard/jasnah.pri";
-            destination = "/root/wireguard-keys/private";
-            owner.user = "root";
-            owner.group = "root";
-          };
         };
       };
   };
   "fiasco" = { config, pkgs, lib, ... }: {
       deployment = {
         targetUser = "root";
-        targetHost = "192.168.0.10";
+        targetHost = "192.168.0.16";
         #  targetHost = "10.100.0.4";
         secrets = {
-          "wireguard-key" = {
-            source = "../secrets/wireguard/fiasco.pri";
-            destination = "/root/wireguard-keys/private";
-            owner.user = "root";
-            owner.group = "root";
-          };
           "restic-password" = {
             source = "../secrets/restic/restic-password";
             destination = "/root/restic-keys/restic-password";

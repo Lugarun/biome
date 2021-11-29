@@ -6,16 +6,11 @@
       ./hardware-configuration.nix
       ../../common
       ../../modules/restic.nix
-      ../../modules/emanote.nix
     ];
 
   # biome config
   biome.restic.enable = true;
   biome.restic.backupDirs = [ "/home/syncthing/data" ];
-
-  biome.emanote.enable = true;
-  biome.emanote.noteDir = "/home/syncthing/data/projects/zettelkasten";
-
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

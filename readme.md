@@ -53,6 +53,29 @@ Finally create a password for your restic backup and add it to your secrets. To 
 systemctl start restic-backups-uwonedrive.service
 ```
 
+#### Accessing your backups
+
+Make sure rclone can see the backups.
+```
+rclone --config secrets/restic/uwonedrive-rclone-config lsd uwonedrive:backups
+```
+
+Make sure rclone config is in the right place.
+```
+rclone config file
+```
+
+List snapshots
+
+```
+restic -r rclone:uwonedrive:backups snapshots
+```
+
+Recover snapshots
+```
+restic -r rclone:uwonedrive:backupsrestore df2564be --target /tmp/restore-work
+```
+
 ## Todo
 
 - secret distribution (uses legacy morph right now)

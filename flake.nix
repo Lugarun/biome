@@ -4,32 +4,25 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-21.05";
     deploy-rs.url = "github:serokell/deploy-rs";
-    emanote.url = "https://github.com/srid/emanote/archive/refs/heads/master.tar.gz";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-21.05";
     ecosystem = {
       url = "path:/home/lukas/projects/ecosystem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, deploy-rs, emanote, home-manager, ecosystem, ... }:
+  outputs = { self, nixpkgs, deploy-rs, home-manager, ecosystem, ... }:
   let
     system = "x86_64-linux";
     config = {
       allowUnfree = true;
     };
-    overlays = [
-      (self: super: {
-        inherit emanote;
-        })
-    ];
     pkgs = import nixpkgs { inherit system; };
     lib = nixpkgs.lib;
     mkNixosConfiguration = host:
       lib.nixosSystem {
         inherit system;
         modules = [
-          ({ nixpkgs = { inherit config overlays; }; })
           ./hosts/${host}/configuration.nix
         ] ++ (if host == "jasnah" then [
           home-manager.nixosModules.home-manager
@@ -55,10 +48,12 @@
     nixosConfigurations = {
       jasnah = mkNixosConfiguration "jasnah";
       fiasco = mkNixosConfiguration "fiasco";
+      tanavast = mkNixosConfiguration "tanavast";
     };
     deploy.nodes = {
       jasnah = mkDeployNode "jasnah" "localhost";
       fiasco = mkDeployNode "fiasco" "192.168.0.16";
+      tanavast = mkDeployNode "tanavast" "104.152.208.10";
     };
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     devShell.${system} = pkgs.mkShell {

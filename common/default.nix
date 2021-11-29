@@ -2,8 +2,8 @@
 {
   imports = [
     ./users
-    ../modules/wireguard.nix
     ../modules/syncthing.nix
+    ../modules/tailscale.nix
   ];
 
   # Enable nix flakes
@@ -43,7 +43,5 @@
   biome.syncthing.baseDir = lib.mkIf (config.networking.hostName == "fiasco") /home/syncthing/data;
   biome.syncthing.folders = lib.importJSON ../config/syncthing.json;
 
-  biome.wireguard.enable = true;
-  biome.wireguard.networkInfo = lib.importJSON ../config/wireguard.json;
-
+  biome.tailscale.enable = true;
 }

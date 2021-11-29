@@ -83,14 +83,6 @@ in {
           };
         };
       };
-      virtualHosts = {
-        "zettelkasten.biome" = {
-          locations."/" = {
-            proxyPass = "http://localhost:8000/";
-            proxyWebsockets = true;
-          };
-        };
-      };
     };
   };
 }

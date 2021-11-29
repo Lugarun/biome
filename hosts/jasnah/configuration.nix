@@ -9,12 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../common
-      ../../modules/emanote.nix
     ];
-
-  # biome config
-  biome.emanote.enable = true;
-  biome.emanote.noteDir = "/home/lukas/projects/zettelkasten";
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
