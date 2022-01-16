@@ -44,4 +44,9 @@
   biome.syncthing.folders = lib.importJSON ../config/syncthing.json;
 
   biome.tailscale.enable = true;
+
+  # Nix garbage collection
+  nix.gc.automatic = true;
+  nix.gc.options = "--delete-older-than 30d";
+  nix.gc.dates = "weekly";
 }

@@ -9,22 +9,30 @@
       url = "path:/home/lukas/projects/ecosystem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    zotero-remarkable-overlay.url = "github:lugarun/zotero-remarkable";
   };
 
-  outputs = { self, nixpkgs, deploy-rs, home-manager, ecosystem, ... }:
+  outputs = { self, nixpkgs, deploy-rs, home-manager, ecosystem, emacs-overlay, zotero-remarkable-overlay, ... }:
   let
     system = "x86_64-linux";
     config = {
       allowUnfree = true;
     };
-    pkgs = import nixpkgs { inherit system; };
+    overlays = [
+      (import ./overlays/davmail.nix)
+      emacs-overlay.overlay
+      zotero-remarkable-overlay.overlay
+    ];
+    pkgs = import nixpkgs { inherit system overlays; };
     lib = nixpkgs.lib;
     mkNixosConfiguration = host:
       lib.nixosSystem {
         inherit system;
         modules = [
+          ({pkgs, ... }: { nixpkgs = { inherit config overlays; }; })
           ./hosts/${host}/configuration.nix
-        ] ++ (if host == "jasnah" then [
+        ] ++ (if builtins.elem host ["jasnah" "triwizard"] then [
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -49,11 +57,13 @@
       jasnah = mkNixosConfiguration "jasnah";
       fiasco = mkNixosConfiguration "fiasco";
       tanavast = mkNixosConfiguration "tanavast";
+      triwizard = mkNixosConfiguration "triwizard";
     };
     deploy.nodes = {
-      jasnah = mkDeployNode "jasnah" "localhost";
-      fiasco = mkDeployNode "fiasco" "192.168.0.16";
-      tanavast = mkDeployNode "tanavast" "104.152.208.10";
+      jasnah = mkDeployNode "jasnah" "100.87.83.86";
+      fiasco = mkDeployNode "fiasco" "100.98.155.47";
+      tanavast = mkDeployNode "tanavast" "100.73.30.58";
+      triwizard = mkDeployNode "triwizard" "100.110.99.103";
     };
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     devShell.${system} = pkgs.mkShell {
