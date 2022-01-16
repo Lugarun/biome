@@ -9,7 +9,11 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../common
+      ../../modules/mail.nix
     ];
+
+  programs.steam.enable = true;
+  biome.mail.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -35,6 +39,7 @@
   services.xserver.layout = "us";
   services.xserver.libinput.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.windowManager.xmonad.enable = true;
 
   # Enable sound.
   sound.enable = true;
@@ -42,9 +47,8 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-  # Enable touchpad support
-  services.xserver.windowManager.xmonad.enable = true;
 
+  # 32 bit support for steam
   hardware.opengl.driSupport32Bit = true;
   hardware.pulseaudio.support32Bit = true;
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
@@ -63,4 +67,3 @@
 
   system.stateVersion = "20.09";
 }
-
