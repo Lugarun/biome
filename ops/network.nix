@@ -5,8 +5,15 @@
   "tanavast" = { config, pkgs, lib, ... }: {
       deployment = {
         targetUser = "root";
-        targetHost = "104.152.208.10";
-        # targetHost = "10.100.0.1";
+        targetHost = "100.73.30.58";
+        secrets = {
+        };
+      };
+  };
+  "triwizard" = { config, pkgs, lib, ... }: {
+      deployment = {
+        targetUser = "root";
+        targetHost = "100.110.99.103";
         secrets = {
         };
       };
@@ -14,8 +21,7 @@
   "jasnah" = { config, pkgs, lib, ... }: {
       deployment = {
         targetUser = "root";
-        targetHost = "127.0.0.1";
-        # targetHost = "10.100.0.2";
+        targetHost = "100.87.83.86";
         secrets = {
         };
       };
@@ -23,8 +29,7 @@
   "fiasco" = { config, pkgs, lib, ... }: {
       deployment = {
         targetUser = "root";
-        targetHost = "192.168.0.16";
-        #  targetHost = "10.100.0.4";
+        targetHost = "100.98.155.47";
         secrets = {
           "restic-password" = {
             source = "../secrets/restic/restic-password";
