@@ -22,6 +22,58 @@ have dynamic ip's so a single central node is easier to setup.
   - create computers config under `/hosts`
   - put computers deploy info in `/ops/network.nix`
   - run `make morph-overhaul`
+  
+### Installation steps
+
+#### Install nixos on the computer
+
+#### Authorize Root SSH Access
+Copy this line to the nixos config.
+```
+users.users.root.openssh.authorizedKeys.keys = authorizedSSHKeys;
+```
+#### Add to tailscale
+You will need to access the computer in order to deploy a new nixos instance to it.
+If the computer isn't accessible you can add it to Tailscale by adding the `modules/tailscale.nix`
+code to the nix config and then running `tailscale up` to validate the machine.
+
+#### Create the basic config for the machine
+Copy the configuration generated during the nixos install from the machine to the `hosts` file and
+adjust it to your needs.
+
+You will need to add the computer to:
+1. `/ops/network.nix`
+2. `/flake.nix`
+
+#### Install the new nixos configuration
+Now you can run `make deploy-rs/computer` to deploy your configuration where computer is your new computer name.
+
+#### Additional Steps
+If you included home manager you will also need to:
+
+##### Install Doom
+
+```
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+```
+
+##### Activate Remarkable for sync
+```
+rmapi
+```
+
+
+##### Setup syncthing
+
+First add the computer to `syncthing.json` with a random id.
+Then deploy to the computer, once it is running get the actual id from `localhost:8384` and put it in `syncthing.json`.
+Then open the syncthing web interface on all computers trying to connect to each other and accept the notifications.
+Then wait 2-3 years for the files to sync the first time
+
+##### TODO Download Password Manager
+
+##### Install Steam Games
 
 ## File Setup
 
