@@ -49,5 +49,44 @@
 
   system.stateVersion = "20.03";
 
+  environment.systemPackages = with pkgs; [
+    fuse3 # for nofail option on mergerfs (fuse defaults to fuse2)
+    mergerfs
+    mergerfs-tools
+  ];
+
+  # hard drives
+  fileSystems = {
+    "/mnt/disk1" = {
+      device = "/dev/disk/by-id/ata-WDC_WD5000AAVS-22G9B1_WD-WCAUK0476639-part1";
+      fsType = "ext4";
+    };
+    "/mnt/disk2" = {
+      device = "/dev/disk/by-id/ata-Hitachi_HTS545050B9SA02_100717PBL40017HT423V-part6";
+      fsType = "ext4";
+    };
+    "/mnt/disk3" = {
+      device = "/dev/disk/by-id/ata-Radeon_R7_A22MF061508000332-part1";
+      fsType = "ext4";
+    };
+    "/mnt/storage" = {
+      device = "/mnt/disk1:/mnt/disk2:/mnt/disk3";
+      fsType = "fuse.mergerfs";
+      options = [
+        "defaults"
+        "nonempty"
+        "allow_other"
+        "use_ino"
+        "cache.files=off"
+        "dropcacheonclose=true"
+        "category.create=epmfs"
+        "nofail"
+        "moveonenospc=true"
+        "dropcacheonclose=true"
+        "minfreespace=200G"
+        "fsname=mergerfs 0 0"
+      ];
+    };
+  };
 }
 
