@@ -23,11 +23,6 @@
       fsType = "vfat";
     };
 
-  fileSystems."/home/syncthing/data" =
-    { device = "/dev/disk/by-uuid/e15aa39c-ad60-4e0a-a1d4-b5422e7e0728";
-      fsType = "ext4";
-    };
-
   swapDevices =
     [ { device = "/dev/disk/by-uuid/14e4a5ab-fd38-4e39-8b86-fdda9ece4eb5"; }
     ];

@@ -5,12 +5,8 @@
     [ 
       ./hardware-configuration.nix
       ../../common
-      ../../modules/restic.nix
     ];
 
-  # biome config
-  biome.restic.enable = true;
-  biome.restic.backupDirs = [ "/home/syncthing/data" ];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
