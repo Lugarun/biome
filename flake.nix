@@ -2,9 +2,9 @@
   description = "Biome";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-21.05";
+    nixpkgs.url = "nixpkgs/nixos-21.11";
     deploy-rs.url = "github:serokell/deploy-rs";
-    home-manager.url = "github:nix-community/home-manager/release-21.05";
+    home-manager.url = "github:nix-community/home-manager/release-21.11";
     ecosystem = {
       url = "path:/home/lukas/projects/ecosystem";
       inputs.nixpkgs.follows = "nixpkgs";

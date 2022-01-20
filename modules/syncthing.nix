@@ -43,8 +43,8 @@ in {
       openDefaultPorts = true;
       guiAddress = "0.0.0.0:8384";
       user = "lukas";
-      declarative.devices = lib.mapAttrs (name: value: {id = value;}) (lib.fold lib.recursiveUpdate { } (lib.attrValues cfg.folders));
-      declarative.folders =
+      devices = lib.mapAttrs (name: value: {id = value;}) (lib.fold lib.recursiveUpdate { } (lib.attrValues cfg.folders));
+      folders =
         let
           ifEnabledDevice = devices: lib.elem config.networking.hostName devices;
           createFolderConfig = folder: devices: lib.nameValuePair (builtins.toString (cfg.baseDir + "/${folder}")) {
@@ -64,7 +64,7 @@ in {
         "d ${dir} 2770 lukas syncthing"
         "a ${dir}/ - - - - group:syncthing:rwx,other::-"
         "a ${dir}/ - - - - default:group:syncthing:rwx,default:other::-"
-      ]) ( ["/var/lib/syncthing"] ++ (builtins.attrNames services.syncthing.declarative.folders)));
+      ]) ( ["/var/lib/syncthing"] ++ (builtins.attrNames services.syncthing.folders)));
 
 
 
