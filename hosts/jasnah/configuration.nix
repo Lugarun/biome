@@ -12,7 +12,14 @@
       ../../modules/mail.nix
     ];
 
+  environment.systemPackages = with pkgs; [
+    wineWowPackages.stable
+  ];
+
+  programs.adb.enable = true;
+  users.users.lukas.extraGroups = ["adbusers"];
   programs.steam.enable = true;
+  programs.kdeconnect.enable = true;
   biome.mail.enable = true;
 
   # Use the systemd-boot EFI boot loader.

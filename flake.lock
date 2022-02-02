@@ -22,7 +22,7 @@
     },
     "ecosystem": {
       "locked": {
-        "narHash": "sha256-eol2jLaoFapyUoFVSzjjmIAoYDVowObCUPLJP/1hMp0=",
+        "narHash": "sha256-81Mpzyerl9iwEV48RNDbUO8earPF2W/Qaj3Nv24URqM=",
         "path": "/home/lukas/projects/ecosystem",
         "type": "path"
       },

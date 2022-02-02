@@ -78,7 +78,7 @@ in {
       recommendedTlsSettings = true;
 
       virtualHosts = {
-        "${config.networking.hostName}.biome" = {
+        "${config.networking.hostName}" = {
           forceSSL = false;
           locations."/syncthing/" = {
             proxyPass = "http://0.0.0.0:8384/";
