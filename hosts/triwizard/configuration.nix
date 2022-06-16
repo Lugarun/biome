@@ -7,11 +7,13 @@
       ./hardware-configuration.nix
       ../../common
       ../../modules/mail.nix
+      ../../modules/photoprism.nix
     ];
 
   programs.steam.enable = true;
   biome.mail.enable = true;
   biome.syncthing.enable = true;
+  biome.photoprism.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -53,6 +55,11 @@
     fuse3 # for nofail option on mergerfs (fuse defaults to fuse2)
     mergerfs
     mergerfs-tools
+    cudatoolkit
+    linuxPackages.nvidia_x11
+    libGLU
+    libGL
+
   ];
 
   # hard drives
@@ -65,12 +72,8 @@
       device = "/dev/disk/by-id/ata-Hitachi_HTS545050B9SA02_100717PBL40017HT423V-part6";
       fsType = "ext4";
     };
-    "/mnt/disk3" = {
-      device = "/dev/disk/by-id/ata-Radeon_R7_A22MF061508000332-part1";
-      fsType = "ext4";
-    };
     "/mnt/storage" = {
-      device = "/mnt/disk1:/mnt/disk2:/mnt/disk3";
+      device = "/mnt/disk1:/mnt/disk2";
       fsType = "fuse.mergerfs";
       options = [
         "defaults"

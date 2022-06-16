@@ -7,6 +7,12 @@
         targetUser = "root";
         targetHost = "100.73.30.58";
         secrets = {
+          "matrix-telegram" = {
+            source = "../secrets/matrix-registration-secret.nix";
+            destination = "/etc/secrets/telegram.env";
+            owner.user = "lukas";
+            owner.group = "wheel";
+          };
         };
       };
   };
@@ -22,6 +28,14 @@
       deployment = {
         targetUser = "root";
         targetHost = "100.87.83.86";
+        secrets = {
+        };
+      };
+  };
+  "beasty" = { config, pkgs, lib, ...}: {
+      deployment = {
+        targetUser = "root";
+        targetHost = "100.67.175.75";
         secrets = {
         };
       };

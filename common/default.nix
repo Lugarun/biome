@@ -22,11 +22,19 @@
 
   environment.systemPackages = with pkgs; [
     kakoune
+    nethogs
     vim
     wget
     docker
-    wireguard
+    wireguard-tools
     bashmount
+    nvtop
+    git
+    fasd
+    htop
+    bpytop
+    arandr
+    networkmanagerapplet
   ];
 
   virtualisation.docker.enable = true ;

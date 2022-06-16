@@ -9,18 +9,19 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../common
-      ../../modules/mail.nix
     ];
 
   environment.systemPackages = with pkgs; [
     wineWowPackages.stable
   ];
 
+  services.teamviewer.enable = true;
+
   programs.adb.enable = true;
   users.users.lukas.extraGroups = ["adbusers"];
   programs.steam.enable = true;
   programs.kdeconnect.enable = true;
-  biome.mail.enable = true;
+  #biome.mail.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;

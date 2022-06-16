@@ -4,7 +4,16 @@
     [ 
       ./hardware-configuration.nix
       ../../common
+      ../../modules/calendar.nix
     ];
+
+  biome.calendar = {
+    enableServer = true;
+  };
+
+  security.acme.acceptTerms = true;
+  security.acme.defaults.email = "lfschmidt.me@gmail.com";
+
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -12,11 +21,11 @@
   boot.initrd.checkJournalingFS = false;
 
   networking.hostName = "tanavast"; # Define your hostname.
+  networking.domain = "lutino.space";
   time.timeZone = "America/Toronto";
 
   networking.useDHCP = false;
   networking.interfaces.eth0.useDHCP = false;
-
 
   networking.interfaces.eth0.ipv4.addresses = [ {
     address = "104.152.208.10";

@@ -1,28 +1,36 @@
 # Biome
 
 Welcome to Biome, my vpn/selfhosting setup!
+I am a novice in computer security so don't expect the secret setup to be secure.
 Here are the features we have so far:
-- everything runs nixos so we have one click deploys and updates to all devices on the net
-- wireguard (laptop `jasnah`, phone, local server `fiasco`, remote server `tanavast`)
-- dnsmasq (each device and service gets a `.biome` domain)
-- syncthing (laptop `jasnah` syncs with file server on my lan `fiasco`)
-- restic (my file server `fiasco` makes encrypted backups to a onedrive account)
+- everything runs nixos so we have one click deploys (except for the initial one) and updates to all devices on the net
+- wireguard (laptop `jasnah`, phone, local server `triwizard`, desktop `beasty`, remote server `tanavast`)
+- syncthing (laptop `jasnah` syncs with file server on my lan `triwizard`, and my desktop `beasty`)
+- TODO: restic
 
 ## Wireguard
 
-Right now every device connects to one central node. I had tried to setup a mesh network however most of my devices
-have dynamic ip's so a single central node is easier to setup.
+Right now I use tailscale but I plan on switching to host my own (headscale control server)[https://github.com/juanfont/headscale].
 
 ### Steps to add new computer to wireguard
 
 1. Install nixos on the computer with your ssh key authorized for root access
-2. Setup wireguard for the computer
-  - create new keys using script `make secrets/wireguard/$NAME.pub`
-  - add public key to the json wireguard config file
-  - create computers config under `/hosts`
-  - put computers deploy info in `/ops/network.nix`
-  - run `make morph-overhaul`
-  
+2. Create Computer Config
+  - create computers config under `/hosts/$COMPUTER_NAME`
+  - pull the generated `configuration.nix` and `hardware-configuration.nix` files and adjust as needed
+  - put computers deploy info in `/ops/network.nix` and `flake.nix`
+  - `make deploy-rs/$COMPUTER_NAME`
+3. Add the computers syncthing id to `config/syncthing.json`, syncing files may take a while
+4. Download the password store repo and copy over the gpg key.
+  - `gpg2 --export-secret-keys > keys.gpg`
+  - `scp lukas@original_pc:keys.gpg ./`
+  - `gpg2 --import keys.gpg`
+  - Remove both leftover files
+5. Copy over the password store
+  - `scp -r lukas@original_pc:.local/share/password-store .local/share/`
+6. Add to tailscale `sudo tailscale up` and then adjust step 2.3
+7. If you included ecosystem with your install then you must also go through the ecosystem readme setup steps.
+
 ### Installation steps
 
 #### Install nixos on the computer

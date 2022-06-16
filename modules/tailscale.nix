@@ -15,6 +15,7 @@ in {
     services.tailscale.enable = true;
     networking.firewall = {
       enable = true;
+      checkReversePath = "loose";
       trustedInterfaces = [ "tailscale0" ];
       allowedUDPPorts = [ config.services.tailscale.port ];
     };
