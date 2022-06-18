@@ -14,7 +14,6 @@
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "lfschmidt.me@gmail.com";
 
-
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/xvda";

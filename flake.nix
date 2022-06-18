@@ -6,7 +6,7 @@
     deploy-rs.url = "github:serokell/deploy-rs";
     home-manager.url = "github:nix-community/home-manager/release-22.05";
     ecosystem = {
-      url = "path:/home/lukas/projects/ecosystem";
+      url = "path:/mnt/storage/projects/nix/ecosystem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
@@ -83,7 +83,7 @@
       triwizard = mkNixosConfiguration "triwizard";
     };
     deploy.nodes = {
-      jasnah = mkDeployNode "jasnah" "localhost";
+      jasnah = mkDeployNode "jasnah" "100.87.83.86";
       fiasco = mkDeployNode "fiasco" "100.98.155.47";
       tanavast = mkDeployNode "tanavast" "100.73.30.58";
       triwizard = mkDeployNode "triwizard" "100.110.99.103";

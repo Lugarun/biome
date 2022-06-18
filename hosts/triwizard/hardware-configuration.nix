@@ -14,17 +14,17 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/0f6c209c-d00f-4459-89eb-c921333f33a5";
+    { device = "/dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B778321B815-part1";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/6603-8806";
+    { device = "/dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B778321B815-part3";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/4790d524-3798-4b82-a3b3-93123ea6e3ad"; }
+    [ { device = "/dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B778321B815-part2"; }
     ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

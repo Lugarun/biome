@@ -2,7 +2,6 @@
 {
   imports = [
     ./users
-    ../modules/syncthing.nix
     ../modules/tailscale.nix
   ];
 
@@ -47,9 +46,9 @@
 
 
   # biome config
-  biome.syncthing.enable = true;
-  biome.syncthing.baseDir = lib.mkIf (config.networking.hostName == "fiasco") /home/syncthing/data;
-  biome.syncthing.folders = lib.importJSON ../config/syncthing.json;
+  # biome.syncthing.enable = true;
+  # biome.syncthing.baseDir = lib.mkIf (config.networking.hostName == "fiasco") /home/syncthing/data;
+  # biome.syncthing.folders = lib.importJSON ../config/syncthing.json;
 
   biome.tailscale.enable = true;
 
