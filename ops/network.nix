@@ -21,6 +21,18 @@
         targetUser = "root";
         targetHost = "100.110.99.103";
         secrets = {
+          "restic-password" = {
+            source = "../secrets/restic/restic-password";
+            destination = "/root/restic-keys/restic-password";
+            owner.user = "root";
+            owner.group = "root";
+          };
+          "restic-rclone-config" = {
+            source = "../secrets/restic/uwonedrive-rclone-config";
+            destination = "/root/restic-keys/uwonedrive-rclone-config";
+            owner.user = "lukas";
+            owner.group = "root";
+          };
         };
       };
   };

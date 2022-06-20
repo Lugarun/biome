@@ -5,8 +5,13 @@
     [ 
       ./hardware-configuration.nix
       ../../common
-      ../../modules/photoprism.nix
+      ../../modules/restic.nix
     ];
+
+  biome.restic = {
+    enable = true;
+    backupDirs = ["/mnt/storage" "/home/lukas/workspace" "/home/lukas/phone"];
+  };
 
   snapraid = {
     enable = true;
@@ -120,7 +125,6 @@
   };
 
   programs.steam.enable = true;
-  biome.photoprism.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -196,11 +200,10 @@
         "use_ino"
         "cache.files=off"
         "dropcacheonclose=true"
-        "category.create=epmfs"
-        "nofail"
+        "category.create=mspmfs"
         "moveonenospc=true"
         "dropcacheonclose=true"
-        "minfreespace=200G"
+        "minfreespace=20G"
         "fsname=mergerfs 0 0"
       ];
     };

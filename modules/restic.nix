@@ -10,7 +10,7 @@ in {
     };
     backupDirs = lib.mkOption {
       type = lib.types.listOf lib.types.string;
-      default = [ "/home/syncthing/data" ];
+      default = [ "/mnt/storage/" ];
       description = ''
         The dirs that gets backed up.
       '';

@@ -6,14 +6,12 @@
     deploy-rs.url = "github:serokell/deploy-rs";
     home-manager.url = "github:nix-community/home-manager/release-22.05";
     ecosystem = {
-      url = "path:/mnt/storage/projects/nix/ecosystem";
+      url = "path:/mnt/disk1/projects/software/nix/ecosystem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
-    zotero-remarkable-overlay.url = "github:lugarun/zotero-remarkable";
+    # zotero-remarkable-overlay.url = "github:lugarun/zotero-remarkable";
     nix-matrix-appservices.url = "gitlab:coffeetables/nix-matrix-appservices";
-    #photoprism-overlay.url = "github:c0deaddict/photoprism2nix";
-    nixpkgs-photoprism.url = "github:newAM/nixpkgs/photoprism";
   };
 
   outputs = { self
@@ -22,10 +20,8 @@
             , home-manager
             , ecosystem
             , emacs-overlay
-            , zotero-remarkable-overlay
+            #, zotero-remarkable-overlay
             , nix-matrix-appservices
-            #, photoprism-overlay
-            , nixpkgs-photoprism
             , ... }:
   let
     system = "x86_64-linux";
@@ -37,12 +33,10 @@
       (import ./overlays/davmail.nix)
       (import ./overlays/matrix.nix)
       emacs-overlay.overlay
-      zotero-remarkable-overlay.overlay
+      # zotero-remarkable-overlay.overlay
       nix-matrix-appservices.overlay
       (final: prev: {
-        photoprism = nixpkgs-photoprism.legacyPackages.x86_64-linux.photoprism;
       })
-      #photoprism-overlay.overlay
     ];
     pkgs = import nixpkgs { inherit system overlays; };
     lib = nixpkgs.lib;
@@ -52,8 +46,6 @@
         modules = [
           ({pkgs, ... }: { nixpkgs = { inherit config overlays; }; })
             nix-matrix-appservices.nixosModule
-            "${nixpkgs-photoprism}/nixos/modules/services/web-apps/photoprism.nix"
-            #photoprism-overlay.nixosModules.photoprism
            ./hosts/${host}/configuration.nix
         ] ++ (if builtins.elem host ["jasnah" "triwizard"] then [
           home-manager.nixosModules.home-manager
