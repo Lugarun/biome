@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
 
   imports =
@@ -6,7 +6,23 @@
       ./hardware-configuration.nix
       ../../common
       ../../modules/restic.nix
+      ../../modules/syncthing.nix
     ];
+
+  # Windows via virt-manager
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
+
+
+  biome.syncthing = {
+    enable = true;
+    baseDir = /home/lukas;
+    folders = lib.importJSON ../../config/syncthing.json;
+  };
+  # biome config
+  # biome.syncthing.enable = true;
+  # biome.syncthing.baseDir = lib.mkIf (config.networking.hostName == "fiasco") /home/syncthing/data;
+  # biome.syncthing.folders = lib.importJSON ../config/syncthing.json;
 
   biome.restic = {
     enable = true;
@@ -170,7 +186,7 @@
     linuxPackages.nvidia_x11
     libGLU
     libGL
-
+    virt-manager
   ];
 
   # hard drives

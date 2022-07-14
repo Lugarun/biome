@@ -11,6 +11,50 @@
     enableServer = true;
   };
 
+  virtualisation.oci-containers.containers = {
+    pihole = {
+      image = "pihole/pihole:latest";
+      environment = {
+        TZ = "America/Toronto";
+        ServerIP = "100.73.30.58";
+        VIRTUAL_HOST = "pihole.biome";
+      };
+      extraOptions = [
+        "--cap-add=NET_ADMIN"
+        "--dns=127.0.0.1"
+        "--dns=1.1.1.1"
+      ];
+      workdir = "/var/lib/pihole/";
+      ports = [
+        "100.73.30.58:53:53/tcp"
+        "100.73.30.58:53:53/udp"
+        "30443:443"
+        "3080:80"
+      ];
+      volumes = [
+        "/var/lib/etc-pihole:/etc/pihole"
+        "/var/lib/etc-dnsmasq.d:/etc/dnsmasq.d"
+      ];
+    };
+  };
+
+  services.nginx = {
+    enable = true;
+    recommendedGzipSettings = true;
+    recommendedOptimisation = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    virtualHosts = {
+      "pihole.biome" = {
+        default = true;
+        forceSSL = false;
+        locations."/" = {
+          proxyPass = "http://0.0.0.0:3080/";
+        };
+      };
+    };
+  };
+
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "lfschmidt.me@gmail.com";
 

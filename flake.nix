@@ -6,7 +6,7 @@
     deploy-rs.url = "github:serokell/deploy-rs";
     home-manager.url = "github:nix-community/home-manager/release-22.05";
     ecosystem = {
-      url = "path:/mnt/disk1/projects/software/nix/ecosystem";
+      url = "path:/home/lukas/workspace/nix/ecosystem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     emacs-overlay.url = "github:nix-community/emacs-overlay";

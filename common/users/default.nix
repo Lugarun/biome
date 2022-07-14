@@ -10,7 +10,7 @@ in {
 
   users.users.lukas = {
     isNormalUser = true;
-    extraGroups = [ "video" "networkmanager" "docker" "wheel" "syncthing" "audio" "video" "dialout" ];
+    extraGroups = [ "video" "networkmanager" "docker" "wheel" "syncthing" "audio" "video" "dialout" "libvirtd" "libvirt" ];
     hashedPassword = "$6$QoMeQJwCG5Xh$PrTJgARgUCtHDu21ZPZVCxPe8pnB99o4GfjwdmhCmf8e1MsxhP4PtkuuLmqtemLw8g2.WNaZjKzyHExfJtsxj/";
   };
 }

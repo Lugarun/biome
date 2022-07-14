@@ -2,14 +2,27 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../common
+      ../../modules/syncthing.nix
     ];
+
+
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.hplip ];
+  };
+
+  biome.syncthing = {
+    enable = true;
+    baseDir = /home/lukas;
+    folders = lib.importJSON ../../config/syncthing.json;
+  };
 
   environment.systemPackages = with pkgs; [
     wineWowPackages.stable
