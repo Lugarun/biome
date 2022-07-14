@@ -37,8 +37,8 @@
     },
     "ecosystem": {
       "locked": {
-        "lastModified": 1656451458,
-        "narHash": "sha256-N8Fohb/bATEgshb2CQ8SlPFF3/xIPaGvnsSpOMsHG2w=",
+        "lastModified": 1657838488,
+        "narHash": "sha256-0HxdghgZdaUv21nFDBnjZtBVvL4bKdWOGJb2yU8LwrQ=",
         "path": "/home/lukas/workspace/nix/ecosystem",
         "type": "path"
       },

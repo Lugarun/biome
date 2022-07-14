@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ../../common
       ../../modules/syncthing.nix
+      ../../modules/mail.nix
     ];
 
 
@@ -34,7 +35,7 @@
   users.users.lukas.extraGroups = ["adbusers"];
   programs.steam.enable = true;
   programs.kdeconnect.enable = true;
-  #biome.mail.enable = true;
+  biome.mail.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
