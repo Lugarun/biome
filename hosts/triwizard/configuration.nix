@@ -13,7 +13,6 @@
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
 
-
   biome.syncthing = {
     enable = true;
     baseDir = /home/lukas;
@@ -55,6 +54,14 @@
     scrub.olderThan = 7;
   };
 
+  services.miniflux = {
+    enable = true;
+    adminCredentialsFile = "/etc/secrets/miniflux";
+    config = {
+      BASE_URL = "http://rss.biome/";
+    };
+  };
+
   users.users.lukas.extraGroups = [ "docker" ];
   virtualisation.docker.enable = true;
   virtualisation.oci-containers.containers = {
@@ -88,6 +95,12 @@
         forceSSL = false;
         locations."/" = {
           proxyPass = "http://0.0.0.0:8334/";
+        };
+      };
+      "rss.biome" = {
+        forceSSL = false;
+        locations."/" = {
+          proxyPass = "http://0.0.0.0:8080/";
         };
       };
       "photos.biome" = {

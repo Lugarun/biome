@@ -27,6 +27,12 @@
             owner.user = "root";
             owner.group = "root";
           };
+          "miniflux-admin" = {
+            source = "../secrets/miniflux-admin";
+            destination = "/etc/secrets/miniflux";
+            owner.user = "lukas";
+            owner.group = "syncthing";
+          };
           "restic-rclone-config" = {
             source = "../secrets/restic/uwonedrive-rclone-config";
             destination = "/root/restic-keys/uwonedrive-rclone-config";
