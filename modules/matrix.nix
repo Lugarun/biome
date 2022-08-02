@@ -32,8 +32,6 @@ in {
 
     services.nginx = {
       enable = true;
-      # only recommendedProxySettings and recommendedGzipSettings are strictly required,
-      # but the rest make sense as well
       recommendedTlsSettings = true;
       recommendedOptimisation = true;
       recommendedGzipSettings = true;
@@ -105,11 +103,12 @@ in {
     };
     services.matrix-synapse = {
       enable = true;
-      registration_shared_secret = import ../secrets/matrix-registration-secret.nix;
-      listeners = [
+      #registration_shared_secret = import ../secrets/matrix-registration-secret.nix;
+      settings.server_name = "lutino.space";
+      settings.listeners = [
         {
           port = 8008;
-          bind_address = "::1";
+          bind_addresses = ["::1"];
           type = "http";
           tls = false;
           x_forwarded = true;
@@ -121,73 +120,6 @@ in {
           ];
         }
       ];
-    };
-
-
-    services.matrix-appservices = {
-      addRegistrationFiles = true;
-      homeserverDomain = config.networking.domain;
-      homeserverURL = "https://${fqdn}";
-      services = {
-        # wsproxy = {
-        #   port = 29331;
-        #   startupScript = ''
-        #     ${pkgs.mautrix-wsproxy}/bin/${pkgs.mautrix-wsproxy.meta.mainProgram} -config $SETTINGS_FILE
-        #   '';
-        #   package = pkgs.mautrix-wsproxy;
-        #   registrationData = {
-        #     id = "imessage";
-        #     namespaces = {
-        #       users = [
-        #         {
-        #           exclusive = true;
-        #           regex = "@imessage_.*:myrdd.info";
-        #         }
-        #         {
-        #           exclusive = true;
-        #           regex = "@imessagebot:${config.networking.domain}";
-        #         }
-        #       ];
-        #     };
-        #   };
-        #   settings = {
-        #     listen_address = "localhost:29331";
-        #     appservices = [
-        #       {
-        #         id = "imessage";
-        #         as = "$AS_TOKEN";
-        #         hs = "$HS_TOKEN";
-        #       }
-        #     ];
-        #   };
-        # };
-        discord = {
-          port = 29180;
-          format = "mx-puppet";
-          package = pkgs.mx-puppet-discord;
-          settings.bridge.enableGroupSync = true;
-        };
-        facebook = {
-          port = 29185;
-          format = "mautrix-python";
-          package = pkgs.mautrix-facebook;
-        };
-        twitter = {
-          port = 29186;
-          format = "mautrix-python";
-          package = pkgs.mautrix-twitter;
-        };
-        instagram = {
-          port = 29187;
-          format = "mautrix-python";
-          package = pkgs.mautrix-instagram;
-        };
-        telegram = {
-          port = 29188;
-          format = "mautrix-python";
-          package = pkgs.mautrix-telegram;
-        };
-      };
     };
   };
 }

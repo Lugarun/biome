@@ -5,10 +5,15 @@
       ./hardware-configuration.nix
       ../../common
       ../../modules/calendar.nix
+      ../../modules/matrix.nix
     ];
 
   biome.calendar = {
     enableServer = true;
+  };
+  biome.matrix = {
+    enable = true;
+    address = "lutino.space";
   };
 
   virtualisation.oci-containers.containers = {
