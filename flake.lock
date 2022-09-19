@@ -37,8 +37,8 @@
     },
     "ecosystem": {
       "locked": {
-        "lastModified": 1658163750,
-        "narHash": "sha256-MoA8UZT/hqcU+x3KSEcKWq2Y+ByBRDtXKHA4QWqz1LY=",
+        "lastModified": 1663351098,
+        "narHash": "sha256-RrGtzts4wlua0N3CFjSnjCDzMr2Ps/keomyjDwmab64=",
         "path": "/home/lukas/workspace/nix/ecosystem",
         "type": "path"
       },
@@ -129,6 +129,28 @@
         "owner": "nix-community",
         "ref": "release-22.05",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "kmonad": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "nix",
+        "lastModified": 1663565216,
+        "narHash": "sha256-S6m7utTGclQL93YtX2KWK8qaaaBDNs6UYxrBsz1w9s0=",
+        "owner": "kmonad",
+        "repo": "kmonad",
+        "rev": "cbdace2bb7b27e47c2397e662265a28a1030b7c7",
+        "type": "github"
+      },
+      "original": {
+        "dir": "nix",
+        "owner": "kmonad",
+        "repo": "kmonad",
         "type": "github"
       }
     },
@@ -249,6 +271,7 @@
         "ecosystem": "ecosystem",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
+        "kmonad": "kmonad",
         "nix-matrix-appservices": "nix-matrix-appservices",
         "nixpkgs": "nixpkgs_5"
       }

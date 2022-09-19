@@ -11,6 +11,8 @@
     };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     # zotero-remarkable-overlay.url = "github:lugarun/zotero-remarkable";
+    kmonad.url = "github:kmonad/kmonad?dir=nix";
+    kmonad.inputs.nixpkgs.follows = "nixpkgs";
     nix-matrix-appservices.url = "gitlab:coffeetables/nix-matrix-appservices";
   };
 
@@ -22,6 +24,7 @@
             , emacs-overlay
             #, zotero-remarkable-overlay
             , nix-matrix-appservices
+            , kmonad
             , ... }:
   let
     system = "x86_64-linux";
@@ -32,6 +35,7 @@
     overlays = [
       (import ./overlays/davmail.nix)
       (import ./overlays/matrix.nix)
+      kmonad.overlays.default
       emacs-overlay.overlay
       # zotero-remarkable-overlay.overlay
       nix-matrix-appservices.overlay
@@ -46,6 +50,7 @@
         modules = [
           ({pkgs, ... }: { nixpkgs = { inherit config overlays; }; })
             nix-matrix-appservices.nixosModule
+            kmonad.nixosModules.default
            ./hosts/${host}/configuration.nix
         ] ++ (if builtins.elem host ["jasnah" "triwizard"] then [
           home-manager.nixosModules.home-manager
