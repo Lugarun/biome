@@ -3,8 +3,13 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-22.05";
+    unstable.url = "nixpkgs/nixos-unstable";
     deploy-rs.url = "github:serokell/deploy-rs";
     home-manager.url = "github:nix-community/home-manager/release-22.05";
+    nix-gaming = {
+      url = "github:fufexan/nix-gaming";
+      inputs.unstable.follows = "nixpkgs";
+    };
     ecosystem = {
       url = "path:/home/lukas/workspace/nix/ecosystem";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,6 +30,8 @@
             #, zotero-remarkable-overlay
             , nix-matrix-appservices
             , kmonad
+            , nix-gaming
+            , unstable
             , ... }:
   let
     system = "x86_64-linux";
@@ -40,7 +47,42 @@
       # zotero-remarkable-overlay.overlay
       nix-matrix-appservices.overlay
       (final: prev: {
+        unstable = import unstable {system = final.system; } ;
+        nix-gaming = nix-gaming.outputs.packages.x86_64-linux;
+        rocket-league = nix-gaming.lib.legendaryBuilder {
+          inherit (pkgs) system;
+          games = {
+            rocket-league = {
+              # find names with `legendary list`
+              desktopName = "Rocket League";
+              # find out on lutris/winedb/protondb
+              tricks = ["dxvk" "win10"];
+              # google "<game name> logo"
+              icon = builtins.fetchurl {
+                url = "https://www.pngkey.com/png/full/16-160666_rocket-league-png.png";
+                name = "rocket-league.png";
+                sha256 = "09n90zvv8i8bk3b620b6qzhj37jsrhmxxf7wqlsgkifs4k2q8qpf";
+              };
+              # if you don't want winediscordipcbridge running for this game
+              discordIntegration = false;
+              # if you dont' want to launch the game using gamemode
+              gamemodeIntegration = false;
+              preCommands = ''
+                echo "the game will start!"
+              '';
+              postCommands = ''
+                echo "the game has stopped!"
+              '';
+            };
+          };
+          opts = {
+            # same options as above can be provided here, and will be applied to all games
+            # NOTE: game-specific options take precedence
+            wine = nix-gaming.packages.${pkgs.system}.wine-tkg;
+          };
+        };
       })
+      nix-gaming.overlays.default
     ];
     pkgs = import nixpkgs { inherit system overlays; };
     lib = nixpkgs.lib;

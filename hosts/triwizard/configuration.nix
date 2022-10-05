@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib,  ... }:
 {
 
   imports =
@@ -22,6 +22,8 @@
   # biome.syncthing.enable = true;
   # biome.syncthing.baseDir = lib.mkIf (config.networking.hostName == "fiasco") /home/syncthing/data;
   # biome.syncthing.folders = lib.importJSON ../config/syncthing.json;
+
+
 
   biome.restic = {
     enable = true;
@@ -177,7 +179,6 @@
   services.xserver.libinput.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.windowManager.xmonad.enable = true;
-
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -200,6 +201,7 @@
     libGLU
     libGL
     virt-manager
+    rocket-league.rocket-league
   ];
 
   # hard drives
