@@ -4,11 +4,11 @@ Welcome to Biome, my vpn/selfhosting setup!
 I am a novice in computer security so don't expect the secret setup to be secure.
 Here are the features we have so far:
 - everything runs nixos so we have one click deploys (except for the initial one) and updates to all devices on the net
-- wireguard (laptop `jasnah`, phone, local server `triwizard`, desktop `beasty`, remote server `tanavast`)
-- syncthing (laptop `jasnah` syncs with file server on my lan `triwizard`, and my desktop `beasty`)
-- TODO: restic
+- tailscale
+- syncthing
+- restic backups
 
-## Wireguard
+## Wireguard base VPN
 
 Right now I use tailscale but I plan on switching to host my own (headscale control server)[https://github.com/juanfont/headscale].
 
@@ -58,19 +58,6 @@ Now you can run `make deploy-rs/computer` to deploy your configuration where com
 
 #### Additional Steps
 If you included home manager you will also need to:
-
-##### Install Doom
-
-```
-git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-~/.emacs.d/bin/doom install
-```
-
-##### Activate Remarkable for sync
-```
-rmapi
-```
-
 
 ##### Setup syncthing
 
@@ -155,4 +142,7 @@ This setup is heavily inspired by the following:
 - [syncthing nixos](https://cloud.tissot.de/gitea/benneti/nixos/src/commit/a6ec7bd0206642537596ffdf11049af8312ca6c6)
 - [nixos restic rclone](https://francis.begyn.be/blog/nixos-restic-backups) [and this](https://wiki.cont.run/self-hosted-services/)
 - [selfhosted software listing](https://github.com/awesome-selfhosted/awesome-selfhosted)
-- [flake and deploy-rs showcase](https://github.com/bbigras/nix-config/blob/master/nix/mk-host.nix)
+- [flake and deploy-rs showcase](https://github.com/bbigras/nix-config)
+- [flake and custom ssh based deploy script](https://github.com/hlissner/dotfiles)
+- [flake showcase](https://github.com/hlissner/dotfiles)
+- [another one](https://github.com/lovesegfault/nix-config)

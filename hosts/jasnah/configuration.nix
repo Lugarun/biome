@@ -13,16 +13,6 @@
       ../../modules/mail.nix
     ];
 
-  services.kmonad = {
-    enable = true;
-    keyboards = {
-      lt = {
-        device = "/dev/input/by-id/usb-lutino.space_Lukas_Layer_L_1C14DF44559024C6-if02-event-kbd";
-        config = builtins.readFile ./lt_miryoku_kmonad.kbd;
-      };
-    };
-  };
-
   services.printing = {
     enable = true;
     drivers = [ pkgs.hplip ];

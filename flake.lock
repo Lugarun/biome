@@ -37,8 +37,8 @@
     },
     "ecosystem": {
       "locked": {
-        "lastModified": 1666101984,
-        "narHash": "sha256-Y8xadyLnH6VMgcYEES30nEy1gwf/HziBq4OqemC1KjA=",
+        "lastModified": 1667510326,
+        "narHash": "sha256-ZUW8TWIYTyyn1gZU5GBve71mbuuvsqDegONsNYSLURk=",
         "path": "/home/lukas/workspace/nix/ecosystem",
         "type": "path"
       },
@@ -105,6 +105,21 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "rev": "1ed9fb1935d260de5fe1c2f7ee0ebaae17ed2fa1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
         "type": "github"
       },
       "original": {
@@ -304,6 +319,7 @@
         "deploy-rs": "deploy-rs",
         "ecosystem": "ecosystem",
         "emacs-overlay": "emacs-overlay",
+        "flake-utils": "flake-utils_2",
         "home-manager": "home-manager",
         "kmonad": "kmonad",
         "nix-gaming": "nix-gaming",
