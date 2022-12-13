@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   imports =
@@ -12,6 +12,7 @@
       ../../modules/syncthing.nix
       ../../modules/mail.nix
     ];
+
 
   services.printing = {
     enable = true;
@@ -24,14 +25,10 @@
     folders = lib.importJSON ../../config/syncthing.json;
   };
 
-  environment.systemPackages = with pkgs; [
-    wineWowPackages.stable
-  ];
-
   services.teamviewer.enable = true;
 
   programs.adb.enable = true;
-  users.users.lukas.extraGroups = ["adbusers"];
+  users.users.lukas.extraGroups = ["adbusers" "audio" "jackaudio"];
   programs.steam.enable = true;
   programs.kdeconnect.enable = true;
   biome.mail.enable = true;

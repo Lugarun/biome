@@ -39,7 +39,7 @@
   virtualisation.docker.enable = true ;
 
   nixpkgs.config.allowUnfree = true;
-  nix.allowedUsers = [ "@wheel" ];
+  nix.settings.allowed-users = [ "@wheel" ];
 
   # This is needed by wpgtk
   programs.dconf.enable = true;

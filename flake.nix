@@ -2,11 +2,11 @@
   description = "Biome";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-22.05";
+    nixpkgs.url = "nixpkgs/nixos-22.11";
     unstable.url = "nixpkgs/nixos-unstable";
     deploy-rs.url = "github:serokell/deploy-rs";
     flake-utils.url = "github:numtide/flake-utils";
-    home-manager.url = "github:nix-community/home-manager/release-22.05";
+    home-manager.url = "github:nix-community/home-manager/release-22.11";
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
       inputs.unstable.follows = "nixpkgs";
@@ -15,10 +15,10 @@
       url = "path:/home/lukas/workspace/nix/ecosystem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
     kmonad.url = "github:kmonad/kmonad?dir=nix";
     kmonad.inputs.nixpkgs.follows = "nixpkgs";
     nix-matrix-appservices.url = "gitlab:coffeetables/nix-matrix-appservices";
+    musnix.url = "github:musnix/musnix";
   };
 
   outputs = inputs @ { self
@@ -26,11 +26,11 @@
             , deploy-rs
             , home-manager
             , ecosystem
-            , emacs-overlay
             , nix-matrix-appservices
             , kmonad
             , nix-gaming
             , unstable
+            , musnix
             , flake-utils
             , ... }:
   rec {
@@ -44,7 +44,6 @@
         (import overlays/matrix.nix)
         (import overlays/rl.nix inputs)
         inputs.kmonad.overlays.default
-        inputs.emacs-overlay.overlay
         inputs.nix-matrix-appservices.overlay
         inputs.nix-gaming.overlays.default
       ];
@@ -59,6 +58,7 @@
         pkgs = legacyPackages."x86_64-linux";
         modules = [
           ./hosts/jasnah/configuration.nix
+          musnix.nixosModules.musnix
         ];
     };
     nixosConfigurations.triwizard = nixpkgs.lib.nixosSystem {
@@ -84,11 +84,10 @@
     };
     homeConfigurations.lukas = home-manager.lib.homeManagerConfiguration {
       pkgs = legacyPackages."x86_64-linux";
-      system = "x86_64-linux";
       extraSpecialArgs = { inherit inputs; };
-      homeDirectory = "/home/lukas";
-      username = "lukas";
-      configuration = ecosystem.config;
+      modules = [
+        ecosystem.config
+      ];
     };
     deploy.nodes = {
       jasnah = {
