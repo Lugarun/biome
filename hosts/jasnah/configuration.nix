@@ -9,20 +9,12 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../common
-      ../../modules/syncthing.nix
       ../../modules/mail.nix
     ];
-
 
   services.printing = {
     enable = true;
     drivers = [ pkgs.hplip ];
-  };
-
-  biome.syncthing = {
-    enable = true;
-    baseDir = /home/lukas;
-    folders = lib.importJSON ../../config/syncthing.json;
   };
 
   services.teamviewer.enable = true;

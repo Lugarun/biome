@@ -163,9 +163,9 @@
   networking.hostName = "triwizard";
   time.timeZone = "America/Toronto";
 
-  networking.useDHCP = false;
-  networking.interfaces.enp3s0.useDHCP = true;
-  networking.interfaces.wlp4s0.useDHCP = true;
+  # networking.useDHCP = false;
+  # networking.interfaces.enp3s0.useDHCP = true;
+  # networking.interfaces.wlp4s0.useDHCP = true;
   networking.networkmanager.enable = true;
 
   # Configure X11
@@ -204,6 +204,13 @@
     rocket-league.rocket-league
   ];
 
+  fileSystems = {
+    "/backup" = {
+      device = "/dev/disk/by-id/ata-ST2000DM008-2FR102_ZK301BBG-part1";
+      options = [ "rw" "users" ];
+      fsType = "ext4";
+    };
+  };
   # hard drives
   # fileSystems = {
   #   "/mnt/disk1" = {
@@ -238,6 +245,6 @@
   #       "fsname=mergerfs 0 0"
   #     ];
   #   };
-  };
+  # };
 }
 

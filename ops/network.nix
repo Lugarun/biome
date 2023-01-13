@@ -19,7 +19,7 @@
   "triwizard" = { config, pkgs, lib, ... }: {
       deployment = {
         targetUser = "root";
-        targetHost = "100.110.99.103";
+        targetHost = "100.10.10.226";
         secrets = {
           "restic-password" = {
             source = "../secrets/restic/restic-password";

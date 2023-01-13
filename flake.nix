@@ -112,7 +112,7 @@
       };
       triwizard = {
         hostname = "triwizard";
-        address = "100.110.99.103";
+        address = "100.99.214.56";
         remoteBuild = true;
         autoRollback = true;
         magicRollback = true;
