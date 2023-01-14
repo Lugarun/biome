@@ -130,6 +130,21 @@
           };
         };
       };
+      tanavast = {
+        hostname = "tanavast";
+        address = "100.73.30.58";
+        remoteBuild = false;
+        autoRollback = true;
+        magicRollback = true;
+
+        profiles = {
+          system = {
+            user = "root";
+            sshUser = "root";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.tanavast;
+          };
+        };
+      };
     };
   };
 }
