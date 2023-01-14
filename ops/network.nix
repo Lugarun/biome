@@ -13,6 +13,12 @@
             owner.user = "lukas";
             owner.group = "wheel";
           };
+          "miniflux-admin" = {
+            source = "../secrets/miniflux-admin";
+            destination = "/etc/secrets/miniflux";
+            owner.user = "lukas";
+            owner.group = "syncthing";
+          };
         };
       };
   };

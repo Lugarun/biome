@@ -8,7 +8,7 @@ in {
       type = lib.types.bool;
       default = false;
     };
-    baseURL = lib.mkOption {
+    domain = lib.mkOption {
       type = lib.types.string;
       default = "rss.lutino.space";
       description = ''
@@ -30,7 +30,7 @@ in {
       enable = true;
       adminCredentialsFile = "/etc/secrets/miniflux";
       config = {
-        LISTEN_ADDR = cfg.port;
+        PORT = cfg.port;
       };
     };
 
@@ -40,15 +40,12 @@ in {
     };
 
     # Nginx
-    services.nginx.virtualHosts."${baseURL}" = {
-          default = true;
-          forceSSL = true;
-          locations."/" = {
-            proxyPass = "http://0.0.0.0:${cfg.port}/";
-          };
-        };
+    services.nginx.virtualHosts."${cfg.domain}" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:${cfg.port}/";
       };
     };
   };
 }
-

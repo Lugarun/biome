@@ -14,6 +14,10 @@
     address = "lutino.space";
   };
 
+  biome.rssReader = {
+    enable = true;
+  };
+
   virtualisation.oci-containers.containers = {
     pihole = {
       image = "pihole/pihole:latest";
