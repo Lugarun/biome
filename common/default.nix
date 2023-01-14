@@ -37,19 +37,10 @@
   ];
 
   virtualisation.docker.enable = true ;
-
   nixpkgs.config.allowUnfree = true;
   nix.settings.allowed-users = [ "@wheel" ];
 
-  # This is needed by wpgtk
-  programs.dconf.enable = true;
-
-
-  # biome config
-  # biome.syncthing.enable = true;
-  # biome.syncthing.baseDir = lib.mkIf (config.networking.hostName == "fiasco") /home/syncthing/data;
-  # biome.syncthing.folders = lib.importJSON ../config/syncthing.json;
-
+  # Tailscale
   biome.tailscale.enable = true;
 
   # Nix garbage collection

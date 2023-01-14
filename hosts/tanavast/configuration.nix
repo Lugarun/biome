@@ -8,9 +8,6 @@
       ../../modules/matrix.nix
     ];
 
-  biome.calendar = {
-    enableServer = true;
-  };
   biome.matrix = {
     enable = true;
     address = "lutino.space";

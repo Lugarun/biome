@@ -23,37 +23,9 @@
   # biome.syncthing.baseDir = lib.mkIf (config.networking.hostName == "fiasco") /home/syncthing/data;
   # biome.syncthing.folders = lib.importJSON ../config/syncthing.json;
 
-
-
   # biome.restic = {
   #   enable = true;
   #   backupDirs = ["/mnt/storage" "/home/lukas/workspace" "/home/lukas/phone"];
-  # };
-
-  # snapraid = {
-  #   enable = true;
-  #   parityFiles = [
-  #     "/mnt/parity1/snapraid.parity"
-  #   ];
-  #   contentFiles = [
-  #     "/mnt/disk1/.snapraid.content"
-  #     "/mnt/disk2/.snapraid.content"
-  #   ];
-  #   dataDisks = {
-  #     d1 = "/mnt/disk1/";
-  #     d2 = "/mnt/disk2/";
-  #   };
-  #   exclude = [
-  #     "/lost+found/"
-  #     "/tmp/"
-  #     "*.unrecoverable"
-  #     "downloads/"
-  #     "appdata/"
-  #     "*.!sync"
-  #   ];
-  #   touchBeforeSync = true;
-  #   scrub.plan = 22;
-  #   scrub.olderThan = 7;
   # };
 
   # services.miniflux = {
@@ -210,41 +182,11 @@
       options = [ "rw" "users" ];
       fsType = "ext4";
     };
+    "/storage" = {
+      device = "/dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B778321B815-part1";
+      options = [ "rw" "users" ];
+      fsType = "ext4";
+    };
   };
-  # hard drives
-  # fileSystems = {
-  #   "/mnt/disk1" = {
-  #     device = "/dev/disk/by-id/ata-WDC_WD5000AAVS-22G9B1_WD-WCAUK0476639-part1";
-  #     options = [ "rw" "users" ];
-  #     fsType = "ext4";
-  #   };
-  #   "/mnt/disk2" = {
-  #     device = "/dev/disk/by-id/ata-Hitachi_HTS545050B9SA02_100717PBL40017HT423V-part6";
-  #     options = [ "rw" "users" ];
-  #     fsType = "ext4";
-  #   };
-  #   "/mnt/parity1" = {
-  #     device = "/dev/disk/by-id/ata-ST2000DM008-2FR102_ZK301BBG-part1";
-  #     options = [ "rw" "users" ];
-  #     fsType = "ext4";
-  #   };
-  #   "/mnt/storage" = {
-  #     device = "/mnt/disk1:/mnt/disk2";
-  #     fsType = "fuse.mergerfs";
-  #     options = [
-  #       "defaults"
-  #       "nonempty"
-  #       "allow_other"
-  #       "use_ino"
-  #       "cache.files=off"
-  #       "dropcacheonclose=true"
-  #       "category.create=mspmfs"
-  #       "moveonenospc=true"
-  #       "dropcacheonclose=true"
-  #       "minfreespace=20G"
-  #       "fsname=mergerfs 0 0"
-  #     ];
-  #   };
-  # };
 }
 
