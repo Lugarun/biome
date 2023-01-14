@@ -6,6 +6,7 @@
       ../../common
       ../../modules/calendar.nix
       ../../modules/matrix.nix
+      ../../modules/rssReader.nix
     ];
 
   biome.matrix = {
