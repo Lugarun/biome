@@ -16,17 +16,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-matrix-appservices.url = "gitlab:coffeetables/nix-matrix-appservices";
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs = inputs @ { self
             , nixpkgs
+            , unstable
             , deploy-rs
+            , flake-utils
             , home-manager
+            , nix-gaming
             , ecosystem
             , nix-matrix-appservices
-            , nix-gaming
-            , unstable
-            , flake-utils
+            , sops-nix
             , ... }:
   rec {
     legacyPackages."x86_64-linux" = import nixpkgs {
@@ -45,6 +47,8 @@
     devShells."x86_64-linux".default = self.legacyPackages."x86_64-linux".mkShell {
       buildInputs = [
         deploy-rs.packages."x86_64-linux".default
+        legacyPackages."x86_64-linux".sops
+        legacyPackages."x86_64-linux".ssh-to-age
       ];
     };
     nixosConfigurations.jasnah = nixpkgs.lib.nixosSystem {
@@ -52,6 +56,7 @@
         pkgs = legacyPackages."x86_64-linux";
         modules = [
           ./hosts/jasnah/configuration.nix
+          sops-nix.nixosModules.sops
         ];
     };
     nixosConfigurations.triwizard = nixpkgs.lib.nixosSystem {
@@ -59,6 +64,7 @@
         pkgs = legacyPackages."x86_64-linux";
         modules = [
           ./hosts/triwizard/configuration.nix
+          sops-nix.nixosModules.sops
         ];
     };
     nixosConfigurations.tanavast = nixpkgs.lib.nixosSystem {
@@ -66,6 +72,7 @@
         pkgs = legacyPackages."x86_64-linux";
         modules = [
           ./hosts/tanavast/configuration.nix
+          sops-nix.nixosModules.sops
         ];
     };
     nixosConfigurations.fiasco = nixpkgs.lib.nixosSystem {
@@ -73,6 +80,7 @@
         pkgs = legacyPackages."x86_64-linux";
         modules = [
           ./hosts/fiasco/configuration.nix
+          sops-nix.nixosModules.sops
         ];
     };
     homeConfigurations.lukas = home-manager.lib.homeManagerConfiguration {

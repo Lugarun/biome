@@ -29,8 +29,8 @@ in {
           RandomizeDelaySec = "20m";
         };
 
-        passwordFile = "/root/restic-keys/restic-password";
-        rcloneConfigFile = "/root/restic-keys/uwonedrive-rclone-config";
+        # passwordFile = "/root/restic-keys/restic-password";
+        # rcloneConfigFile = "/root/restic-keys/uwonedrive-rclone-config";
       };
     };
   };

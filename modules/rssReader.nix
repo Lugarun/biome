@@ -25,10 +25,13 @@ in {
   };
 
   config = lib.mkIf cfg.enable rec {
-
+    sops.secrets."miniflux/adminCredentials" = {
+      group = config.users.groups.keys.name;
+      mode = "0444";
+    };
     services.miniflux = {
       enable = true;
-      adminCredentialsFile = "/etc/secrets/miniflux";
+      adminCredentialsFile = "/run/secrets/miniflux/adminCredentials";
       config = {
         PORT = cfg.port;
       };
