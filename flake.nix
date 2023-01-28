@@ -15,8 +15,6 @@
       url = "path:/home/lukas/workspace/nix/ecosystem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    kmonad.url = "github:kmonad/kmonad?dir=nix";
-    kmonad.inputs.nixpkgs.follows = "nixpkgs";
     nix-matrix-appservices.url = "gitlab:coffeetables/nix-matrix-appservices";
   };
 
@@ -26,7 +24,6 @@
             , home-manager
             , ecosystem
             , nix-matrix-appservices
-            , kmonad
             , nix-gaming
             , unstable
             , flake-utils
@@ -41,7 +38,6 @@
         (import overlays/davmail.nix)
         (import overlays/matrix.nix)
         (import overlays/rl.nix inputs)
-        inputs.kmonad.overlays.default
         inputs.nix-matrix-appservices.overlay
         inputs.nix-gaming.overlays.default
       ];
