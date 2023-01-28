@@ -52,7 +52,7 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
     virtualHosts = {
-      "pihole.biome" = {
+      "pihole.lutino.space" = {
         default = true;
         forceSSL = false;
         locations."/" = {

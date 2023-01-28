@@ -12,6 +12,9 @@
       ../../modules/mail.nix
     ];
 
+  # for gtk dracula
+  programs.dconf.enable = true;
+
   services.printing = {
     enable = true;
     drivers = [ pkgs.hplip ];

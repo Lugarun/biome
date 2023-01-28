@@ -28,13 +28,7 @@
   #   backupDirs = ["/mnt/storage" "/home/lukas/workspace" "/home/lukas/phone"];
   # };
 
-  # services.miniflux = {
-  #   enable = true;
-  #   adminCredentialsFile = "/etc/secrets/miniflux";
-  #   config = {
-  #     BASE_URL = "http://rss.biome/";
-  #   };
-  # };
+
 
   # users.users.lukas.extraGroups = [ "docker" ];
   # virtualisation.docker.enable = true;
