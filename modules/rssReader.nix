@@ -9,14 +9,14 @@ in {
       default = false;
     };
     domain = lib.mkOption {
-      type = lib.types.string;
+      type = lib.types.str;
       default = "rss.lutino.space";
       description = ''
         The base url
       '';
     };
     port = lib.mkOption {
-      type = lib.types.string;
+      type = lib.types.str;
       default = "5335";
       description = ''
         Internal port

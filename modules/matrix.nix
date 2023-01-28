@@ -13,7 +13,7 @@ in {
       default = false;
     };
     address = lib.mkOption {
-      type = lib.types.string;
+      type = lib.types.str;
       description = ''
         The address for the server
       '';

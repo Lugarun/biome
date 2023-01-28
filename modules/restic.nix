@@ -9,7 +9,7 @@ in {
       default = false;
     };
     backupDirs = lib.mkOption {
-      type = lib.types.listOf lib.types.string;
+      type = lib.types.listOf lib.types.path;
       default = [ "/mnt/storage/" ];
       description = ''
         The dirs that gets backed up.
