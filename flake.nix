@@ -18,7 +18,6 @@
     kmonad.url = "github:kmonad/kmonad?dir=nix";
     kmonad.inputs.nixpkgs.follows = "nixpkgs";
     nix-matrix-appservices.url = "gitlab:coffeetables/nix-matrix-appservices";
-    musnix.url = "github:musnix/musnix";
   };
 
   outputs = inputs @ { self
@@ -30,7 +29,6 @@
             , kmonad
             , nix-gaming
             , unstable
-            , musnix
             , flake-utils
             , ... }:
   rec {
@@ -58,7 +56,6 @@
         pkgs = legacyPackages."x86_64-linux";
         modules = [
           ./hosts/jasnah/configuration.nix
-          musnix.nixosModules.musnix
         ];
     };
     nixosConfigurations.triwizard = nixpkgs.lib.nixosSystem {
