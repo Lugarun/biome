@@ -26,9 +26,18 @@ in {
       user = "lukas";
       dataDir = "/home/lukas";
       configDir = "/home/lukas/.config/syncthing";
+      devices = {
+        "jasnah" = {
+          id = "PHJMFPO-KPWGSSE-SCFKV6D-EHLUGNK-4TOR2BU-XV2BTON-AHHEFE4-O5SKEQ2";
+        };
+        "triwizard" = {
+          id = "7FJQ53I-3NQTO3C-D65GBXF-CZUZJS7-MRKUGB3-XS3MPYB-FMKLWIZ-R2PZFAG";
+        };
+      };
       folders = {
         "workspace" = {
           path = "/home/lukas/workspace";
+          devices = [ "jasnah" "triwizard" ];
         };
       };
     };
