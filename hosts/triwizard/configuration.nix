@@ -7,45 +7,22 @@
       ../../common
       ../../modules/restic.nix
       ../../modules/syncthing.nix
+      ../../modules/filestash.nix
     ];
 
   # Windows via virt-manager
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
 
-
   biome.syncthing.enable = true;
-  #   enable = true;
-  #   baseDir = /home/lukas;
-  #   folders = lib.importJSON ../../config/syncthing.json;
-  # };
-  # biome config
-  # biome.syncthing.enable = true;
-  # biome.syncthing.baseDir = lib.mkIf (config.networking.hostName == "fiasco") /home/syncthing/data;
-  # biome.syncthing.folders = lib.importJSON ../config/syncthing.json;
+  biome.filestash.enable = true;
+
 
   # biome.restic = {
   #   enable = true;
   #   backupDirs = ["/mnt/storage" "/home/lukas/workspace" "/home/lukas/phone"];
   # };
 
-
-
-  # users.users.lukas.extraGroups = [ "docker" ];
-  # virtualisation.docker.enable = true;
-  # virtualisation.oci-containers.containers = {
-  #   filestash = {
-  #     image = "machines/filestash:latest";
-  #     volumes = [
-  #       "/var/lib/filestash:/app/data/state"
-  #     ];
-  #     environment = {
-  #     };
-  #     ports = [
-  #       "8334:8334"
-  #     ];
-  #   };
-  # };
   # services.nginx = {
   #   enable = true;
   #   recommendedGzipSettings = true;
@@ -81,30 +58,6 @@
   #   };
   # };
   # virtualisation.oci-containers.containers = {
-  #   pihole = {
-  #     image = "pihole/pihole:latest";
-  #     environment = {
-  #       TZ = "America/Toronto";
-  #       ServerIP = "100.110.99.103";
-  #       VIRTUAL_HOST = "pihole.biome";
-  #     };
-  #     extraOptions = [
-  #       "--cap-add=NET_ADMIN"
-  #       "--dns=127.0.0.1"
-  #       "--dns=1.1.1.1"
-  #     ];
-  #     workdir = "/var/lib/pihole/";
-  #     ports = [
-  #       "100.110.99.103:53:53/tcp"
-  #       "100.110.99.103:53:53/udp"
-  #       "30443:443"
-  #       "3080:80"
-  #     ];
-  #     volumes = [
-  #       "/var/lib/etc-pihole:/etc/pihole"
-  #       "/var/lib/etc-dnsmasq.d:/etc/dnsmasq.d"
-  #     ];
-  #   };
   #   pigallery = {
   #     image = "bpatrik/pigallery2:latest";
   #     environment = {
