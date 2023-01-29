@@ -170,16 +170,44 @@
     rocket-league.rocket-league
   ];
 
+
   fileSystems = {
     "/backup" = {
       device = "/dev/disk/by-id/ata-ST2000DM008-2FR102_ZK301BBG-part1";
       options = [ "rw" "users" ];
       fsType = "ext4";
     };
-    "/storage" = {
+    "/archive" = {
       device = "/dev/disk/by-id/ata-KINGSTON_SA400S37480G_50026B778321B815-part1";
       options = [ "rw" "users" ];
       fsType = "ext4";
+    };
+    "/mergerfs/disk1" = {
+      device = "/dev/disk/by-id/ata-WDC_WD5000AAVS-22G9B1_WD-WCAUK0476639-part1";
+      options = [ "rw" "users" ];
+      fsType = "ext4";
+    };
+    "/mergerfs/disk2" = {
+      device = "/dev/disk/by-id/ata-Hitachi_HTS545050B9SA02_100717PBL40017HT423V-part6";
+      options = [ "rw" "users" ];
+      fsType = "ext4";
+    };
+    "/mergerfs/merged" = {
+      device = "/mergerfs/disk1:/mergerfs/disk2";
+      fsType = "fuse.mergerfs";
+      options = [
+        "defaults"
+        "nonempty"
+        "allow_other"
+        "use_ino"
+        "cache.files=off"
+        "dropcacheonclose=true"
+        "category.create=mspmfs"
+        "moveonenospc=true"
+        "dropcacheonclose=true"
+        "minfreespace=20G"
+        "fsname=mergerfs 0 0"
+      ];
     };
   };
 }
