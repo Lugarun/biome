@@ -13,7 +13,8 @@
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
 
-  # biome.syncthing = {
+
+  biome.syncthing.enable = true;
   #   enable = true;
   #   baseDir = /home/lukas;
   #   folders = lib.importJSON ../../config/syncthing.json;

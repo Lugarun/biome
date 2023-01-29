@@ -12,7 +12,7 @@
       inputs.unstable.follows = "nixpkgs";
     };
     ecosystem = {
-      url = "path:/home/lukas/workspace/nix/ecosystem";
+      url = "path:/home/lukas/workspace/triwizard/nix/ecosystem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-matrix-appservices.url = "gitlab:coffeetables/nix-matrix-appservices";

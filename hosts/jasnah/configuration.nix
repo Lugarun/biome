@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ../../common
       ../../modules/mail.nix
+      ../../modules/syncthing.nix
     ];
 
   # for gtk dracula
@@ -19,6 +20,8 @@
     enable = true;
     drivers = [ pkgs.hplip ];
   };
+
+  biome.syncthing.enable = true;
 
   services.teamviewer.enable = true;
 

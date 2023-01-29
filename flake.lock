@@ -37,13 +37,13 @@
     },
     "ecosystem": {
       "locked": {
-        "lastModified": 1674744318,
-        "narHash": "sha256-KXBdxxV528Sjr0k1GPnbwzf6JJClNaKyTaFht+F9WNk=",
-        "path": "/home/lukas/workspace/nix/ecosystem",
+        "lastModified": 1675026626,
+        "narHash": "sha256-oIseqWyQUyPvvP5mKFC66BurxnvaQx0ptgHBkyFhg4s=",
+        "path": "/home/lukas/workspace/triwizard/nix/ecosystem",
         "type": "path"
       },
       "original": {
-        "path": "/home/lukas/workspace/nix/ecosystem",
+        "path": "/home/lukas/workspace/triwizard/nix/ecosystem",
         "type": "path"
       }
     },
