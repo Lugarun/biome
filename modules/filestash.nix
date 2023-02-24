@@ -2,7 +2,7 @@
 let
   cfg = config.biome.filestash;
 in {
-  options.biome.restic = {
+  options.biome.filestash = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;

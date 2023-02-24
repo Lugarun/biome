@@ -146,3 +146,4 @@ This setup is heavily inspired by the following:
 - [flake and custom ssh based deploy script](https://github.com/hlissner/dotfiles)
 - [flake showcase](https://github.com/hlissner/dotfiles)
 - [another one](https://github.com/lovesegfault/nix-config)
+- [another one]https://git.sr.ht/~misterio/nix-config

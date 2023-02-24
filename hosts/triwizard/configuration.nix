@@ -15,7 +15,7 @@
   programs.dconf.enable = true;
 
   biome.syncthing.enable = true;
-  biome.filestash.enable = true;
+  # biome.filestash.enable = true;
 
 
   # biome.restic = {
