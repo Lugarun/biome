@@ -2,11 +2,13 @@ keys:
   - &jasnah age1rvs736ll3g85csv4nxluujg42ehzu7cq7vtg69929g4qjt4t4aasylvuzt
   - &tanavast age165e2khu2k7wdq2kjgy7t3xamy5s95wqqedrargqkn98fl0d3senq0y79em
   - &lukas c6f03c805445b9b5cf95876c8669740bb4952de0
+  - &triwizard age1pwmttj7pz2eequ47xx6txr25c0excdfxcr3tf4kf7lwhn2yt8fcsjnzf4t
 creation_rules:
-  - path_regex: secrets/[^/]+\.yaml$
+  - path_regex: secrets/[^/]+$
     key_groups:
       - age:
         - *jasnah
         - *tanavast
+        - *triwizard
         pgp:
         - *lukas

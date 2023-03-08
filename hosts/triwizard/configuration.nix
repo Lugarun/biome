@@ -8,6 +8,7 @@
       ../../modules/restic.nix
       ../../modules/syncthing.nix
       ../../modules/filestash.nix
+      ../../modules/slurm.nix
     ];
 
   # Windows via virt-manager
@@ -16,6 +17,13 @@
 
   biome.syncthing.enable = true;
   # biome.filestash.enable = true;
+  biome.slurm = {
+    enable = true;
+    server = true;
+    client = true;
+    name = [ "triwizard" ];
+    controlMachine = "triwizard";
+  };
 
 
   # biome.restic = {
