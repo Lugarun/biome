@@ -21,7 +21,7 @@
     enable = true;
     server = true;
     client = true;
-    name = [ "triwizard" ];
+    name = [ "triwizard RealMemory=30000 CPUs=12 Boards=1 SocketsPerBoard=1 CoresPerSocket=6 ThreadsPerCore=2" ];
     controlMachine = "triwizard";
   };
 

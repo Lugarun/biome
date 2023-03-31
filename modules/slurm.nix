@@ -41,6 +41,7 @@ in {
     services.slurm = {
       client.enable = cfg.client;
       server.enable = cfg.server;
+      enableStools = !cfg.client && !cfg.server;
       nodeName = cfg.name;
       controlMachine = cfg.controlMachine;
       partitionName = [

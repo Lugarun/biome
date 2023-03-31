@@ -11,7 +11,17 @@
       ../../common
       ../../modules/mail.nix
       ../../modules/syncthing.nix
+      ../../modules/slurm.nix
     ];
+
+  biome.slurm = {
+    enable = true;
+    server = false;
+    client = false;
+    name = [];
+    controlMachine = "triwizard";
+  };
+
 
   # for gtk dracula
   programs.dconf.enable = true;
