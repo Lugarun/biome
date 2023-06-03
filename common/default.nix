@@ -40,7 +40,7 @@
     git
     fasd
     htop
-    bpytop
+    btop
     arandr
     networkmanagerapplet
   ];
