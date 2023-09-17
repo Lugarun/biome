@@ -6,14 +6,12 @@
     unstable.url = "nixpkgs/nixos-unstable";
     deploy-rs.url = "github:serokell/deploy-rs";
     flake-utils.url = "github:numtide/flake-utils";
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
-      inputs.unstable.follows = "nixpkgs";
     };
     ecosystem = {
       url = "path:/home/lukas/workspace/nix/ecosystem";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "unstable";
     };
     nix-matrix-appservices.url = "gitlab:coffeetables/nix-matrix-appservices";
     sops-nix.url = "github:Mic92/sops-nix";
@@ -24,7 +22,6 @@
             , unstable
             , deploy-rs
             , flake-utils
-            , home-manager
             , nix-gaming
             , ecosystem
             , nix-matrix-appservices
@@ -83,13 +80,8 @@
           sops-nix.nixosModules.sops
         ];
     };
-    homeConfigurations.lukas = home-manager.lib.homeManagerConfiguration {
-      pkgs = legacyPackages."x86_64-linux";
-      extraSpecialArgs = { inherit inputs; };
-      modules = [
-        ecosystem.config
-      ];
-    };
+    homeConfigurations.lukas = ecosystem.homeConfigurations.lukas
+    ;
     deploy.nodes = {
       jasnah = {
         hostname = "jasnah";

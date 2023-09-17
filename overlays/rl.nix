@@ -1,6 +1,6 @@
 inputs:
   (final: prev: {
-    nix-gaming = inputs.nix-gaming.outputs.packages.x86_64-linux;
+    nix-gaming = inputs.nix-gaming.packages.x86_64-linux;
     rocket-league = inputs.nix-gaming.lib.legendaryBuilder {
       inherit (inputs.nixpkgs);
       system = "x86_64-linux";

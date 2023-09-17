@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 let
-  cfg = config.biome.filestash;
+  cfg = config.biome.localai;
 in {
-  options.biome.filestash = {
+  options.biome.localai = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -14,15 +14,17 @@ in {
     virtualisation.docker.enable = true;
     virtualisation.oci-containers.containers = {
       filestash = {
-        image = "machines/filestash:latest";
+        image = "quay.io/go-skynet/local-ai:latest";
         volumes = [
-          "/var/lib/:/app/data/state"
+          "/var/lib/localai:/models"
         ];
         environment = {
+          "MODELS_PATH" = "/models";
         };
         ports = [
-          "8334:8334"
+          "8000:8000"
         ];
+        command = "/user/bin/local-ai";
       };
     };
   };

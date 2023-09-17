@@ -7,9 +7,9 @@
       ../../common
       ../../modules/restic.nix
       ../../modules/syncthing.nix
-      ../../modules/filestash.nix
-      ../../modules/slurm.nix
     ];
+
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   # Windows via virt-manager
   virtualisation.libvirtd.enable = true;
@@ -17,13 +17,13 @@
 
   biome.syncthing.enable = true;
   # biome.filestash.enable = true;
-  biome.slurm = {
-    enable = true;
-    server = true;
-    client = true;
-    name = [ "triwizard RealMemory=30000 CPUs=12 Boards=1 SocketsPerBoard=1 CoresPerSocket=6 ThreadsPerCore=2" ];
-    controlMachine = "triwizard";
-  };
+  # biome.slurm = {
+  #   enable = true;
+  #   server = true;
+  #   client = true;
+  #   name = [ "triwizard RealMemory=30000 CPUs=12 Boards=1 SocketsPerBoard=1 CoresPerSocket=6 ThreadsPerCore=2" ];
+  #   controlMachine = "triwizard";
+  # };
 
 
   # biome.restic = {
@@ -129,7 +129,7 @@
     libGLU
     libGL
     virt-manager
-    rocket-league.rocket-league
+    nix-gaming.rocket-league
   ];
 
 
