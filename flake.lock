@@ -44,8 +44,8 @@
         "tree-sitter-kak": "tree-sitter-kak"
       },
       "locked": {
-        "lastModified": 1694968441,
-        "narHash": "sha256-fdZnJPl1Su2vVaSpQe2uq5TH8eZiN5wprfwWNLZTtlM=",
+        "lastModified": 1694968940,
+        "narHash": "sha256-2TsNbiYDeO7K3qov26pq598SrJiHEi8SAakaUMRYzT8=",
         "path": "/home/lukas/workspace/nix/ecosystem",
         "type": "path"
       },

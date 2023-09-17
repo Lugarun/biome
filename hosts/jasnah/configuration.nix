@@ -13,6 +13,7 @@
       ../../modules/syncthing.nix
     ];
 
+  systemd.services.NetworkManager-wait-online.enable = false;
   # harddrive filesystem support
 
   boot.supportedFilesystems = [ "ntfs" ];

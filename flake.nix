@@ -98,6 +98,7 @@
           };
           home = {
             user = "lukas";
+            sshUser = "root";
             profilePath = "/nix/var/nix/profiles/per-user/lukas/home-manager";
             path = deploy-rs.lib.x86_64-linux.activate.custom (self.homeConfigurations.lukas).activationPackage "$PROFILE/activate";
           };
