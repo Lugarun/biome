@@ -130,6 +130,8 @@
     libGL
     virt-manager
     nix-gaming.rocket-league
+    legendary-gl # For rocket-league auth
+    gamemode # For rocket league startup
   ];
 
 

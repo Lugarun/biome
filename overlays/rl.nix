@@ -2,7 +2,6 @@ inputs:
   (final: prev: {
     nix-gaming = inputs.nix-gaming.packages.x86_64-linux;
     rocket-league = inputs.nix-gaming.lib.legendaryBuilder {
-      inherit (inputs.nixpkgs);
       system = "x86_64-linux";
       games = {
         rocket-league = {
@@ -14,7 +13,7 @@ inputs:
           # if you don't want winediscordipcbridge running for this game
           discordIntegration = false;
           # if you dont' want to launch the game using gamemode
-          gamemodeIntegration = false;
+          gamemodeIntegration = true;
           preCommands = ''
             echo "the game will start!"
           '';
