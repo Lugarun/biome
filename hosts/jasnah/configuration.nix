@@ -34,7 +34,7 @@
   users.users.lukas.extraGroups = ["adbusers" "audio" "jackaudio"];
   programs.steam.enable = true;
   programs.kdeconnect.enable = true;
-  biome.mail.enable = true;
+  # biome.mail.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
